@@ -142,7 +142,8 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            <div className="overflow-hidden" ref={emblaRef}>
+            {/* Contenedor con padding para evitar que los badges se corten */}
+            <div className="overflow-hidden px-8 py-8" ref={emblaRef}>
               <div className="flex">
                 {featuredPrograms.map((program, index) => (
                   <div key={program.id} className="flex-[0_0_100%] min-w-0 relative">
@@ -156,7 +157,7 @@ export function Hero() {
                           className="relative"
                         >
                           {/* Efecto sutil detrás de la imagen */}
-                          <div className="absolute -inset-4 bg-gradient-to-br from-[#316eb5]/15 to-[#3CAA36]/10 rounded-3xl blur-2xl" />
+                          <div className="absolute -inset-2 bg-gradient-to-br from-[#316eb5]/15 to-[#3CAA36]/10 rounded-3xl blur-2xl" />
 
                           {/* Contenedor de la imagen */}
                           <motion.div
@@ -181,14 +182,14 @@ export function Hero() {
                             initial={{ opacity: 0, scale: 0.8, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             transition={{ delay: 0.6, type: "spring", stiffness: 200 }}
-                            className="absolute -top-4 -left-4 z-20"
+                            className="absolute top-2 left-2 z-20"
                           >
-                            <div className="bg-[#FBEA24] text-[#233a63] px-5 py-3 rounded-2xl shadow-xl">
+                            <div className="bg-[#FBEA24] text-[#233a63] px-4 py-2.5 rounded-xl shadow-xl">
                               <div className="flex items-center gap-2">
-                                <div className="w-3 h-3 bg-[#3CAA36] rounded-full animate-pulse" />
+                                <div className="w-2.5 h-2.5 bg-[#3CAA36] rounded-full animate-pulse" />
                                 <span className="text-xs font-bold uppercase tracking-wide">Próximo Curso</span>
                               </div>
-                              <p className="text-lg font-bold mt-1">{program.startDate}</p>
+                              <p className="text-base font-bold mt-0.5">{program.startDate}</p>
                             </div>
                           </motion.div>
 
@@ -197,14 +198,14 @@ export function Hero() {
                             initial={{ opacity: 0, scale: 0.8, x: 20 }}
                             animate={{ opacity: 1, scale: 1, x: 0 }}
                             transition={{ delay: 0.8, type: "spring", stiffness: 200 }}
-                            className="absolute -bottom-4 -right-4 z-20"
+                            className="absolute bottom-2 right-2 z-20"
                           >
-                            <div className="bg-white text-[#233a63] px-5 py-3 rounded-2xl shadow-xl border-2 border-[#316eb5]">
+                            <div className="bg-white text-[#233a63] px-4 py-2.5 rounded-xl shadow-xl border-2 border-[#316eb5]">
                               <div className="flex items-center gap-2">
-                                <Sparkles size={16} className="text-[#316eb5]" />
+                                <Sparkles size={14} className="text-[#316eb5]" />
                                 <span className="text-sm font-bold">{program.badge}</span>
                               </div>
-                              <p className="text-xs text-[#35669A] mt-1">Cupos limitados</p>
+                              <p className="text-xs text-[#35669A] mt-0.5">Cupos limitados</p>
                             </div>
                           </motion.div>
 
@@ -214,7 +215,7 @@ export function Hero() {
                               initial={{ opacity: 0, rotate: -20, scale: 0.5 }}
                               animate={{ opacity: 1, rotate: -12, scale: 1 }}
                               transition={{ delay: 1, type: "spring", stiffness: 200 }}
-                              className="absolute top-4 -right-6 z-20"
+                              className="absolute top-2 right-2 z-20"
                             >
                               <div className="bg-[#3CAA36] text-white px-4 py-2 rounded-full shadow-lg">
                                 <span className="text-sm font-bold">{program.discount}</span>
@@ -234,14 +235,14 @@ export function Hero() {
               <>
                 <button
                   onClick={scrollPrev}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-white/90 hover:bg-white text-[#316eb5] p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
+                  className="absolute left-0 top-1/2 -translate-y-1/2 z-30 bg-white/90 hover:bg-white text-[#316eb5] p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
                   aria-label="Curso anterior"
                 >
                   <ChevronLeft size={24} />
                 </button>
                 <button
                   onClick={scrollNext}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-white/90 hover:bg-white text-[#316eb5] p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
+                  className="absolute right-0 top-1/2 -translate-y-1/2 z-30 bg-white/90 hover:bg-white text-[#316eb5] p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
                   aria-label="Siguiente curso"
                 >
                   <ChevronRight size={24} />
