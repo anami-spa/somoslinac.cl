@@ -24,7 +24,6 @@ export function Navigation() {
   }
 
   const navItems = [
-    { label: "Inicio", id: "inicio" },
     { label: "Nuestros Programas", id: "programas" },
     { label: "Metodología", id: "metodologia" },
     { label: "Contacto", id: "contacto" },
@@ -41,13 +40,16 @@ export function Navigation() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <motion.div className="flex-shrink-0" whileHover={{ scale: 1.05 }}>
-            <h1 className="text-2xl font-bold">
-              <span className="text-[#233a63]">LINAC</span>
-              <span className="text-[#316eb5]"> | </span>
-              <span className="text-[#35669A] text-sm font-medium">Actitud Lingüística</span>
+          <motion.button
+            onClick={() => scrollToSection("inicio")}
+            className="flex-shrink-0 cursor-pointer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <h1 className="text-2xl font-bold text-[#233a63]">
+              LINAC
             </h1>
-          </motion.div>
+          </motion.button>
 
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
