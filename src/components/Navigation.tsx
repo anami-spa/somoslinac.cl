@@ -46,7 +46,7 @@ export function Navigation() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <h1 className="text-2xl font-bold text-[#233a63]">
+            <h1 className="text-3xl lg:text-4xl font-bold text-[#233a63]">
               LINAC
             </h1>
           </motion.button>

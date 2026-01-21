@@ -1,8 +1,12 @@
 
 import { ArrowRight, Sparkles, CheckCircle, ChevronLeft, ChevronRight } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import useEmblaCarousel from "embla-carousel-react"
+import { gsap } from "gsap"
+import { TextPlugin } from "gsap/TextPlugin"
+
+gsap.registerPlugin(TextPlugin)
 
 // Cursos destacados que se mostrarán en el slider
 const featuredPrograms = [
@@ -52,6 +56,14 @@ export function Hero() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
   const [selectedIndex, setSelectedIndex] = useState(0)
 
+  // Referencias para animaciones GSAP
+  const titleRef = useRef<HTMLHeadingElement>(null)
+  const subtitleRef = useRef<HTMLParagraphElement>(null)
+  const badgeRef = useRef<HTMLDivElement>(null)
+  const featuresRef = useRef<HTMLDivElement>(null)
+  const buttonsRef = useRef<HTMLDivElement>(null)
+  const sliderRef = useRef<HTMLDivElement>(null)
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
@@ -81,6 +93,88 @@ export function Hero() {
     }
   }, [emblaApi, onSelect])
 
+  // Animaciones GSAP al cargar la página
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } })
+
+      // Badge de entrada
+      tl.from(badgeRef.current, {
+        y: -50,
+        opacity: 0,
+        duration: 0.8,
+        ease: "back.out(1.7)",
+      })
+
+      // Título con efecto de palabras separadas
+      if (titleRef.current) {
+        const words = titleRef.current.querySelectorAll(".word")
+        tl.from(
+          words,
+          {
+            y: 100,
+            opacity: 0,
+            rotationX: -90,
+            transformOrigin: "top center",
+            duration: 1,
+            stagger: 0.1,
+          },
+          "-=0.4"
+        )
+      }
+
+      // Subtítulo con fade in desde abajo
+      tl.from(
+        subtitleRef.current,
+        {
+          y: 30,
+          opacity: 0,
+          duration: 0.8,
+        },
+        "-=0.6"
+      )
+
+      // Features con cascade
+      tl.from(
+        featuresRef.current?.children || [],
+        {
+          x: -30,
+          opacity: 0,
+          duration: 0.6,
+          stagger: 0.15,
+        },
+        "-=0.4"
+      )
+
+      // Botones
+      tl.from(
+        buttonsRef.current?.children || [],
+        {
+          scale: 0,
+          opacity: 0,
+          duration: 0.6,
+          stagger: 0.2,
+          ease: "back.out(1.7)",
+        },
+        "-=0.3"
+      )
+
+      // Slider desde la derecha
+      tl.from(
+        sliderRef.current,
+        {
+          x: 100,
+          opacity: 0,
+          duration: 1,
+          ease: "power2.out",
+        },
+        "-=0.8"
+      )
+    })
+
+    return () => ctx.revert()
+  }, [])
+
   return (
     <section
       id="inicio"
@@ -92,21 +186,28 @@ export function Hero() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Columna Izquierda - Contenido LINAC (sin cambios) */}
-          <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+          {/* Columna Izquierda - Contenido LINAC con GSAP */}
+          <div>
+            <div
+              ref={badgeRef}
               className="inline-flex items-center gap-2 bg-[#316eb5]/10 text-[#316eb5] px-4 py-2 rounded-full text-sm font-medium mb-6 border border-[#316eb5]/20"
             >
               <Sparkles size={16} />
               Organismo de Capacitación - Región del Biobío
-            </motion.div>
+            </div>
 
-            <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-[#233a63] leading-tight text-balance">
-              Liderazgo e Innovación en Nuevas Áreas de{" "}
-              <span className="text-[#316eb5] relative">
+            <h1
+              ref={titleRef}
+              className="text-4xl lg:text-5xl xl:text-6xl font-bold text-[#233a63] leading-tight text-balance"
+            >
+              <span className="word inline-block">Liderazgo</span>{" "}
+              <span className="word inline-block">e</span>{" "}
+              <span className="word inline-block">Innovación</span>{" "}
+              <span className="word inline-block">en</span>{" "}
+              <span className="word inline-block">Nuevas</span>{" "}
+              <span className="word inline-block">Áreas</span>{" "}
+              <span className="word inline-block">de</span>{" "}
+              <span className="text-[#316eb5] relative word inline-block">
                 Capacitación
                 <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 12" fill="none">
                   <path d="M2 10C50 4 150 2 298 8" stroke="#FBEA24" strokeWidth="4" strokeLinecap="round" />
@@ -114,27 +215,24 @@ export function Hero() {
               </span>
             </h1>
 
-            <p className="mt-6 text-lg lg:text-xl text-[#35669A] leading-relaxed max-w-xl">
+            <p
+              ref={subtitleRef}
+              className="mt-6 text-lg lg:text-xl text-[#35669A] leading-relaxed max-w-xl"
+            >
               Diseñamos experiencias a medida que fortalecen la salud, el bienestar emocional y mejoran la calidad de
               las relaciones interpersonales.
             </p>
 
-            <div className="mt-6 space-y-2">
+            <div ref={featuresRef} className="mt-6 space-y-2">
               {["Programas personalizados", "Metodología práctica", "Resultados medibles"].map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.4 + i * 0.1 }}
-                  className="flex items-center gap-2 text-[#35669A]"
-                >
+                <div key={i} className="flex items-center gap-2 text-[#35669A]">
                   <CheckCircle size={18} className="text-[#3CAA36]" />
                   <span>{item}</span>
-                </motion.div>
+                </div>
               ))}
             </div>
 
-            <div className="mt-10 flex flex-col sm:flex-row gap-4">
+            <div ref={buttonsRef} className="mt-10 flex flex-col sm:flex-row gap-4">
               <motion.button
                 onClick={() => scrollToSection("programas")}
                 className="inline-flex items-center justify-center px-8 py-4 bg-[#316eb5] text-white font-semibold rounded-full hover:bg-[#254e8a] transition-all duration-200 shadow-lg shadow-[#316eb5]/30"
@@ -153,15 +251,10 @@ export function Hero() {
                 Contáctanos
               </motion.button>
             </div>
-          </motion.div>
+          </div>
 
           {/* Columna Derecha - Slider de Cursos Destacados */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative"
-          >
+          <div ref={sliderRef} className="relative">
             {/* Contenedor con padding para evitar que los badges se corten */}
             <div className="overflow-hidden px-8 py-8" ref={emblaRef}>
               <div className="flex">
@@ -283,7 +376,7 @@ export function Hero() {
                 </div>
               </>
             )}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
