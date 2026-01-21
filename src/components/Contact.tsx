@@ -44,12 +44,12 @@ export function Contact() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-12 lg:items-start">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-8"
+            className="space-y-8 flex flex-col"
           >
             {/* Datos de contacto */}
             <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
@@ -111,7 +111,7 @@ export function Contact() {
             </div>
 
             {/* Mapa */}
-            <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-100 h-[300px]">
+            <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-100 h-[300px] lg:h-full lg:flex-1">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3188.7847815677867!2d-73.05138492350997!3d-36.82699597224455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9669b5068f8c0bb3%3A0x4a0b0b4a4a0b0b4a!2sCochrane%20440%2C%20Concepci%C3%B3n%2C%20B%C3%ADo%20B%C3%ADo!5e0!3m2!1ses!2scl!4v1699999999999!5m2!1ses!2scl"
                 width="100%"
