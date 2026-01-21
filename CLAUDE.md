@@ -6,9 +6,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Este proyecto será migrado a **Laravel + Inertia.js** en el futuro. Al desarrollar, considera:
 
-- Mantener componentes en `Components/` lo más desacoplados posible
-- Evitar dependencias fuertes de Next.js (App Router, Server Components, etc.)
-- Preferir props explícitas sobre contextos de Next.js
+- Mantener componentes en `src/components/` lo más desacoplados posible
+- Evitar dependencias fuertes de React (Context API complejos, hooks custom innecesarios)
+- Preferir props explícitas sobre contextos
 - El formulario de contacto debe prepararse para endpoints Laravel
 - La data de `programs` debe ser fácilmente exportable a backend
 
@@ -18,12 +18,12 @@ Ver `README-LARAVEL.md` para detalles de la migración.
 
 ```bash
 # Desarrollo
-npm run dev           # Iniciar servidor de desarrollo en http://localhost:3000
+npm run dev           # Iniciar servidor Vite en http://localhost:3000
 # También funciona: pnpm dev (si está instalado)
 
 # Build y producción
-npm run build         # Compilar para producción
-npm run start         # Iniciar servidor de producción
+npm run build         # Compilar con Vite para producción
+npm run preview       # Previsualizar build de producción localmente
 
 # Linting
 npm run lint          # Ejecutar ESLint en el proyecto
@@ -32,31 +32,61 @@ npm run lint          # Ejecutar ESLint en el proyecto
 ## Arquitectura del Proyecto
 
 ### Stack Tecnológico
-- **Framework**: Next.js 16 (App Router) con React 19
+- **Framework**: Vite 5 + React 18
 - **Lenguaje**: TypeScript
 - **Estilos**: Tailwind CSS con configuración personalizada de marca LINAC
 - **Animaciones**: Framer Motion para transiciones y efectos visuales
-- **UI Components**: Radix UI + shadcn/ui (en `components/ui/`)
+- **UI Components**: Radix UI + shadcn/ui (en `src/components/ui/`)
 - **Validación**: Zod + React Hook Form
-- **Analytics**: Vercel Analytics
+- **Build**: Vite con code splitting optimizado
+
+### Estructura del Proyecto
+
+```
+/
+├── index.html              # Punto de entrada HTML (Vite)
+├── src/
+│   ├── main.tsx           # Punto de entrada de React
+│   ├── App.tsx            # Componente principal con navegación por estado
+│   ├── globals.css        # Estilos globales y variables CSS LINAC
+│   ├── components/        # Componentes de la aplicación
+│   │   ├── Navigation.tsx
+│   │   ├── Hero.tsx
+│   │   ├── AboutUs.tsx
+│   │   ├── Programs.tsx
+│   │   ├── ProgramDetail.tsx
+│   │   ├── Methodology.tsx
+│   │   ├── Team.tsx
+│   │   ├── Testimonials.tsx
+│   │   ├── Contact.tsx
+│   │   ├── Footer.tsx
+│   │   ├── WhatsAppButton.tsx
+│   │   └── ui/            # Componentes shadcn/ui
+│   └── lib/
+│       └── utils.ts       # Utilidades (cn, etc.)
+├── public/                # Assets estáticos
+├── vite.config.ts         # Configuración de Vite
+└── tailwind.config.ts     # Configuración de Tailwind
+```
 
 ### Estructura de Componentes
 
-El proyecto tiene **dos directorios de componentes** con propósitos distintos:
+El proyecto tiene **un solo directorio de componentes** en `src/components/`:
 
-1. **`Components/`** (con mayúscula): Componentes de página específicos del sitio LINAC
+1. **`src/components/`**: Componentes de página específicos del sitio LINAC
    - `Navigation.tsx`: Barra de navegación con scroll animado
    - `Hero.tsx`: Sección hero principal
    - `AboutUs.tsx`: Sección "Quiénes somos"
    - `Programs.tsx`: Grid de programas con data exportada
    - `ProgramDetail.tsx`: Vista detallada de cada programa
    - `Methodology.tsx`: Sección de metodología
+   - `Team.tsx`: Sección del equipo
    - `Testimonials.tsx`: Testimonios de clientes
    - `Contact.tsx`: Formulario de contacto
    - `Footer.tsx`: Footer del sitio
    - `WhatsAppButton.tsx`: Botón flotante de WhatsApp
 
-2. **`components/ui/`** (minúscula): Componentes reutilizables de shadcn/ui
+2. **`src/components/ui/`**: Componentes reutilizables de shadcn/ui
    - Sistema de diseño con componentes genéricos (Button, Card, Dialog, etc.)
    - No modificar sin necesidad, son componentes estándar
 
@@ -64,7 +94,7 @@ El proyecto tiene **dos directorios de componentes** con propósitos distintos:
 
 El proyecto usa **navegación por estados** en lugar de routing tradicional:
 
-- `app/page.tsx` maneja dos vistas principales:
+- `src/App.tsx` maneja dos vistas principales:
   - Vista Home: muestra todos los componentes de sección
   - Vista Program Detail: cuando se selecciona un programa
 - La navegación dentro de Home usa `scrollIntoView` para desplazamiento suave entre secciones
@@ -72,7 +102,7 @@ El proyecto usa **navegación por estados** en lugar de routing tradicional:
 
 ### Sistema de Colores LINAC
 
-El proyecto usa una paleta corporativa definida en `app/globals.css`:
+El proyecto usa una paleta corporativa definida en `src/globals.css`:
 
 ```css
 /* Azules corporativos */
@@ -100,7 +130,7 @@ El proyecto usa una paleta corporativa definida en `app/globals.css`:
 
 ### Data de Programas
 
-Los programas se definen en `Components/Programs.tsx` como un export constante:
+Los programas se definen en `src/components/Programs.tsx` como un export constante:
 
 ```typescript
 export const programs = [...]
@@ -118,28 +148,35 @@ Cada programa incluye:
 ### Configuraciones Importantes
 
 **TypeScript** (`tsconfig.json`):
-- Path alias: `@/*` apunta a la raíz del proyecto
-- Permite importar con `@/Components/`, `@/lib/`, etc.
+- Path alias: `@/*` apunta a `./src`
+- Permite importar con `@/components/`, `@/lib/`, etc.
 
-**Next.js** (`next.config.mjs`):
-- `ignoreBuildErrors: true` - Los errores de TS no bloquean el build
-- `images.unoptimized: true` - Imágenes sin optimización
+**Vite** (`vite.config.ts`):
+- Puerto de desarrollo: `3000`
+- Alias `@` configurado para `./src`
+- Code splitting optimizado con manualChunks:
+  - `react-vendor`: React y ReactDOM
+  - `ui-vendor`: Componentes Radix UI
+  - `animation-vendor`: Framer Motion
+  - `icons-vendor`: Lucide React
+  - `forms-vendor`: React Hook Form y Zod
+- Sourcemaps habilitados en producción
 
 **Tailwind** (`tailwind.config.ts`):
 - Sistema de colores personalizado basado en variables CSS
 - Plugin `tailwindcss-animate` para animaciones
-- Content paths incluye `*.{js,ts,jsx,tsx,mdx}` en raíz
+- Content paths incluye `src/**/*.{js,ts,jsx,tsx}`
 
 ## Consideraciones para Desarrollo
 
 ### Al Agregar Nuevos Componentes de Página
-- Colocarlos en `Components/` (mayúscula)
-- Usar convención `"use client"` si requieren interactividad
-- Importar con el alias `@/Components/`
+- Colocarlos en `src/components/`
+- No usar directiva `"use client"` (no es necesario en Vite/React)
+- Importar con el alias `@/components/`
 - Seguir el patrón de animaciones con Framer Motion (`motion`, `useInView`)
 
 ### Al Modificar Programas
-- Editar la constante `programs` en `Components/Programs.tsx`
+- Editar la constante `programs` en `src/components/Programs.tsx`
 - Mantener la estructura de datos existente
 - Los IDs deben coincidir con el contenido detallado en `ProgramDetail.tsx`
 
@@ -149,13 +186,19 @@ Cada programa incluye:
 - Respetar los colores de marca LINAC definidos en globals.css
 - Mantener consistencia en bordes redondeados: `rounded-3xl` para cards, `rounded-full` para botones
 
+### Assets e Imágenes
+- Colocar imágenes y archivos estáticos en `/public`
+- Referenciar desde HTML/JSX como `/images/nombre.png`
+- No usar componente `next/image`, usar `<img>` estándar con clases Tailwind
+- Los favicons están en `/public` y configurados en `index.html`
+
 ## Preparación para Migración a Laravel + Inertia.js
 
 ### Arquitectura Actual vs Futura
 
-**Actual (Next.js)**:
+**Actual (Vite + React)**:
 - Single Page Application con navegación por estado
-- `app/page.tsx` maneja vistas mediante `selectedProgram` state
+- `src/App.tsx` maneja vistas mediante `selectedProgram` state
 - Data hardcodeada en `programs` array
 - Scroll suave con `scrollIntoView`
 
@@ -177,10 +220,10 @@ Cada programa incluye:
    - Reemplazar `setSelectedProgram` con `router.visit()` de Inertia
    - Mantener scroll suave con anchors HTML estándar
 
-2. **Componentes** (`Components/` → `resources/js/Components/`):
-   - Mover todos los componentes de `Components/` a Laravel
+2. **Componentes** (`src/components/` → `resources/js/Components/`):
+   - Mover todos los componentes de `src/components/` a Laravel
    - Mantener `components/ui/` (shadcn) sin cambios
-   - Cambiar imports de `@/Components/` a `@/Components/` (Laravel usa Vite alias)
+   - Los imports ya usan `@/` alias, compatible con Vite en Laravel
 
 3. **Data y Estado**:
    - Migrar `programs` array a:
@@ -196,15 +239,15 @@ Cada programa incluye:
    - Agregar token CSRF automáticamente incluido por Inertia
 
 5. **Layout y Configuración**:
-   - Convertir `app/layout.tsx` a layout Inertia persistente
-   - Mover `globals.css` a `resources/css/app.css`
-   - Configurar Vite para Tailwind en Laravel
+   - Convertir `src/App.tsx` a layout Inertia persistente
+   - Mover `src/globals.css` a `resources/css/app.css`
+   - Mantener configuración de Vite (Laravel 11+ usa Vite)
    - Mantener paleta de colores CSS variables
 
 6. **Assets e Imágenes**:
    - Mover `/public` a Laravel `/public`
    - Usar helper `asset()` o Vite para referencias
-   - Mantener `unoptimized: true` no aplicará (no hay Next.js Image)
+   - Las imágenes seguirán siendo estáticas
 
 ### Patrones a Seguir AHORA
 
@@ -218,15 +261,24 @@ Para facilitar la migración futura:
 - Clases Tailwind directas, evitar CSS-in-JS dinámico complejo
 
 ❌ **NO hacer**:
-- No usar `useRouter` de Next.js en nuevos componentes
-- No usar Server Components o `async` components
-- No usar `next/image` (usar `<img>` con Tailwind)
-- No usar API Routes de Next.js (irán a Laravel)
-- No crear Context API complejos que sean difíciles de reemplazar con props Inertia
+- No usar Context API complejos que sean difíciles de reemplazar con props Inertia
+- No crear hooks custom innecesarios
+- No usar librerías de routing de React (no aplicable actualmente)
+- Los formularios deben estar listos para enviar a endpoints Laravel
+
+### Ventajas de la Migración a Vite
+
+✅ **Completado**:
+- Build más rápido que Next.js (HMR instantáneo)
+- Configuración más simple y explícita
+- Sin dependencias de framework pesado
+- Code splitting optimizado manualmente
+- Compatible directo con Laravel Vite
 
 ### Recursos de Migración
 
 - `README-LARAVEL.md`: Guía de migración paso a paso
 - [Inertia.js Docs](https://inertiajs.com): Documentación oficial
+- [Laravel Vite](https://laravel.com/docs/vite): Integración Vite con Laravel
 - Los componentes ya usan estructura compatible con Inertia
 - Tailwind config es transferible directamente
