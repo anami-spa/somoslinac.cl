@@ -1,15 +1,15 @@
 
 import { useState } from "react"
-import { Navigation } from "@/src/components/Navigation"
-import { Hero } from "@/src/components/Hero"
-import { AboutUs } from "@/src/components/AboutUs"
-import { Programs } from "@/src/components/Programs"
-import { Methodology } from "@/src/components/Methodology"
-import { Testimonials } from "@/src/components/Testimonials"
-import { Contact } from "@/src/components/Contact"
-import { Footer } from "@/src/components/Footer"
-import { WhatsAppButton } from "@/src/components/WhatsAppButton"
-import { ProgramDetail } from "@/src/components/ProgramDetail"
+import { Navigation } from "@/components/Navigation"
+import { Hero } from "@/components/Hero"
+import { AboutUs } from "@/components/AboutUs"
+import { Programs } from "@/components/Programs"
+import { Methodology } from "@/components/Methodology"
+import { Testimonials } from "@/components/Testimonials"
+import { Contact } from "@/components/Contact"
+import { Footer } from "@/components/Footer"
+import { WhatsAppButton } from "@/components/WhatsAppButton"
+import { ProgramDetail } from "@/components/ProgramDetail"
 
 function App() {
   const [selectedProgram, setSelectedProgram] = useState<string | null>(null)
