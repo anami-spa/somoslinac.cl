@@ -259,85 +259,60 @@ export function Hero() {
             <div className="overflow-hidden px-8 py-8" ref={emblaRef}>
               <div className="flex">
                 {featuredPrograms.map((program, index) => (
-                  <div key={program.id} className="flex-[0_0_100%] min-w-0 relative">
-                    <AnimatePresence mode="wait">
-                      {selectedIndex === index && (
-                        <motion.div
-                          initial={{ opacity: 0, scale: 0.95 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          exit={{ opacity: 0, scale: 0.95 }}
-                          transition={{ duration: 0.5 }}
-                          className="relative"
-                        >
-                          {/* Efecto sutil detrás de la imagen */}
-                          <div className="absolute -inset-2 bg-gradient-to-br from-[#316eb5]/15 to-[#3CAA36]/10 rounded-3xl blur-2xl" />
+                  <div key={program.id} className="flex-[0_0_100%] min-w-0 relative px-2">
+                    <div className="relative">
+                      {/* Efecto sutil detrás de la imagen */}
+                      <div className="absolute -inset-2 bg-gradient-to-br from-[#316eb5]/15 to-[#3CAA36]/10 rounded-3xl blur-2xl" />
 
-                          {/* Contenedor de la imagen */}
-                          <motion.div
-                            className="relative rounded-2xl overflow-hidden shadow-xl cursor-pointer border border-[#316eb5]/10"
-                            whileHover={{ scale: 1.02 }}
-                            transition={{ duration: 0.3 }}
-                            onClick={() => scrollToSection("programas")}
-                          >
-                            {/* Imagen promocional */}
-                            <img
-                              src={program.image || "/placeholder.svg"}
-                              alt={`${program.title} - ${program.subtitle}`}
-                              className="w-full h-auto object-cover"
-                            />
+                      {/* Contenedor de la imagen */}
+                      <motion.div
+                        className="relative rounded-2xl overflow-hidden shadow-xl cursor-pointer border border-[#316eb5]/10"
+                        whileHover={{ scale: 1.02 }}
+                        transition={{ duration: 0.3 }}
+                        onClick={() => scrollToSection("programas")}
+                      >
+                        {/* Imagen promocional */}
+                        <img
+                          src={program.image || "/placeholder.svg"}
+                          alt={`${program.title} - ${program.subtitle}`}
+                          className="w-full h-auto object-cover"
+                        />
 
-                            {/* Overlay con gradiente sutil al hacer hover */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#233a63]/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
-                          </motion.div>
+                        {/* Overlay con gradiente sutil al hacer hover */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#233a63]/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
+                      </motion.div>
 
-                          {/* Badge flotante - Próximo Curso */}
-                          <motion.div
-                            initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            transition={{ delay: 0.6, type: "spring", stiffness: 200 }}
-                            className="absolute top-2 left-2 z-20"
-                          >
-                            <div className="bg-[#FBEA24] text-[#233a63] px-4 py-2.5 rounded-xl shadow-xl">
-                              <div className="flex items-center gap-2">
-                                <div className="w-2.5 h-2.5 bg-[#3CAA36] rounded-full animate-pulse" />
-                                <span className="text-xs font-bold uppercase tracking-wide">Próximo Curso</span>
-                              </div>
-                              <p className="text-base font-bold mt-0.5">{program.startDate}</p>
-                            </div>
-                          </motion.div>
+                      {/* Badge flotante - Próximo Curso */}
+                      <div className="absolute top-2 left-2 z-20">
+                        <div className="bg-[#FBEA24] text-[#233a63] px-4 py-2.5 rounded-xl shadow-xl">
+                          <div className="flex items-center gap-2">
+                            <div className="w-2.5 h-2.5 bg-[#3CAA36] rounded-full animate-pulse" />
+                            <span className="text-xs font-bold uppercase tracking-wide">Próximo Curso</span>
+                          </div>
+                          <p className="text-base font-bold mt-0.5">{program.startDate}</p>
+                        </div>
+                      </div>
 
-                          {/* Badge flotante - Inscripciones Abiertas */}
-                          <motion.div
-                            initial={{ opacity: 0, scale: 0.8, x: 20 }}
-                            animate={{ opacity: 1, scale: 1, x: 0 }}
-                            transition={{ delay: 0.8, type: "spring", stiffness: 200 }}
-                            className="absolute bottom-2 right-2 z-20"
-                          >
-                            <div className="bg-white text-[#233a63] px-4 py-2.5 rounded-xl shadow-xl border-2 border-[#316eb5]">
-                              <div className="flex items-center gap-2">
-                                <Sparkles size={14} className="text-[#316eb5]" />
-                                <span className="text-sm font-bold">{program.badge}</span>
-                              </div>
-                              <p className="text-xs text-[#35669A] mt-0.5">Cupos limitados</p>
-                            </div>
-                          </motion.div>
+                      {/* Badge flotante - Inscripciones Abiertas */}
+                      <div className="absolute bottom-2 right-2 z-20">
+                        <div className="bg-white text-[#233a63] px-4 py-2.5 rounded-xl shadow-xl border-2 border-[#316eb5]">
+                          <div className="flex items-center gap-2">
+                            <Sparkles size={14} className="text-[#316eb5]" />
+                            <span className="text-sm font-bold">{program.badge}</span>
+                          </div>
+                          <p className="text-xs text-[#35669A] mt-0.5">Cupos limitados</p>
+                        </div>
+                      </div>
 
-                          {/* Badge de descuento (si aplica) */}
-                          {program.hasDiscount && (
-                            <motion.div
-                              initial={{ opacity: 0, rotate: -20, scale: 0.5 }}
-                              animate={{ opacity: 1, rotate: -12, scale: 1 }}
-                              transition={{ delay: 1, type: "spring", stiffness: 200 }}
-                              className="absolute top-2 right-2 z-20"
-                            >
-                              <div className="bg-[#3CAA36] text-white px-4 py-2 rounded-full shadow-lg">
-                                <span className="text-sm font-bold">{program.discount}</span>
-                              </div>
-                            </motion.div>
-                          )}
-                        </motion.div>
+                      {/* Badge de descuento (si aplica) */}
+                      {program.hasDiscount && (
+                        <div className="absolute top-2 right-2 z-20">
+                          <div className="bg-[#3CAA36] text-white px-4 py-2 rounded-full shadow-lg">
+                            <span className="text-sm font-bold">{program.discount}</span>
+                          </div>
+                        </div>
                       )}
-                    </AnimatePresence>
+                    </div>
                   </div>
                 ))}
               </div>
