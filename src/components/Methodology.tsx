@@ -117,3 +117,5 @@ export function Methodology() {
     </section>
   )
 }
+
+export default Methodology

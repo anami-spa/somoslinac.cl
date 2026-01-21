@@ -1058,3 +1058,5 @@ export function ProgramDetail({ programId, onBack }: ProgramDetailProps) {
     </div>
   )
 }
+
+export default ProgramDetail
