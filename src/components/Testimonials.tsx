@@ -77,7 +77,7 @@ export function Testimonials() {
                 ))}
               </div>
 
-              <p className="text-[#35669A] mb-6 leading-relaxed relative z-10">{testimonial.content}</p>
+              <p className="text-[#35669A] text-base mb-6 leading-relaxed relative z-10">{testimonial.content}</p>
 
               <div className="flex items-center gap-4 pt-4 border-t border-gray-100">
                 <img

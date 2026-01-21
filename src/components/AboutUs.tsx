@@ -59,17 +59,17 @@ export function AboutUs() {
             <div className="mt-10 flex items-center gap-8">
               <div className="text-center">
                 <p className="text-3xl font-bold text-[#316eb5]">+500</p>
-                <p className="text-[#35669A] text-sm">Profesionales capacitados</p>
+                <p className="text-[#35669A] text-base">Profesionales capacitados</p>
               </div>
               <div className="w-px h-12 bg-gray-200" />
               <div className="text-center">
                 <p className="text-3xl font-bold text-[#316eb5]">+50</p>
-                <p className="text-[#35669A] text-sm">Empresas atendidas</p>
+                <p className="text-[#35669A] text-base">Empresas atendidas</p>
               </div>
               <div className="w-px h-12 bg-gray-200" />
               <div className="text-center">
                 <p className="text-3xl font-bold text-[#316eb5]">98%</p>
-                <p className="text-[#35669A] text-sm">Satisfacción</p>
+                <p className="text-[#35669A] text-base">Satisfacción</p>
               </div>
             </div>
           </motion.div>

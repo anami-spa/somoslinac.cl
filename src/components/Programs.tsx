@@ -160,7 +160,7 @@ export function Programs({ onProgramSelect }: ProgramsProps) {
                         {program.subtitle}
                       </span>
                       <h3
-                        className={`text-xl font-bold ${program.textDark ? "text-[#233a63]" : "text-white"} mt-1 leading-tight`}
+                        className={`text-2xl font-bold ${program.textDark ? "text-[#233a63]" : "text-white"} mt-1 leading-tight`}
                       >
                         {program.title}
                       </h3>
@@ -177,7 +177,7 @@ export function Programs({ onProgramSelect }: ProgramsProps) {
                       {program.badge}
                     </span>
 
-                    <p className="text-[#35669A] text-sm leading-relaxed mb-5">{program.description}</p>
+                    <p className="text-[#35669A] text-base leading-relaxed mb-5">{program.description}</p>
 
                     {/* Objetivos */}
                     <div className="space-y-2 mb-5">
@@ -189,7 +189,7 @@ export function Programs({ onProgramSelect }: ProgramsProps) {
                           >
                             <Check size={12} style={{ color: program.accentColor }} />
                           </div>
-                          <span className="text-sm text-[#233a63]/80">{objective}</span>
+                          <span className="text-base text-[#233a63]/80">{objective}</span>
                         </div>
                       ))}
                     </div>
