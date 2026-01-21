@@ -22,7 +22,7 @@ export const programs = [
     icon: Globe,
     gradient: "from-[#316eb5] to-[#254e8a]",
     accentColor: "#316eb5",
-    image: "/professional-training-academy-classroom-with-stude.jpg",
+    image: `${import.meta.env.BASE_URL}professional-training-academy-classroom-with-stude.jpg`,
   },
   {
     id: "toma-las-riendas",
@@ -41,7 +41,7 @@ export const programs = [
     icon: Heart,
     gradient: "from-[#3CAA36] to-[#2d8a2a]",
     accentColor: "#3CAA36",
-    image: "/emotional-intelligence-workshop.jpg",
+    image: `${import.meta.env.BASE_URL}emotional-intelligence-workshop.jpg`,
   },
   {
     id: "oratoria-comunicacion",
@@ -62,7 +62,7 @@ export const programs = [
     gradient: "from-[#FBEA24] to-[#e6d520]",
     accentColor: "#FBEA24",
     textDark: true,
-    image: "/corporate-communication-training.jpg",
+    image: `${import.meta.env.BASE_URL}corporate-communication-training.jpg`,
   },
   {
     id: "bootcamp-contenido",
@@ -83,7 +83,7 @@ export const programs = [
     icon: Video,
     gradient: "from-[#E91E63] to-[#9C27B0]",
     accentColor: "#E91E63",
-    image: "/professional-team-development-workshop-diverse-peo.jpg",
+    image: `${import.meta.env.BASE_URL}professional-team-development-workshop-diverse-peo.jpg`,
   },
 ]
 

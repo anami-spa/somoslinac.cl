@@ -10,7 +10,7 @@ const testimonials = [
     name: "Carolina Muñoz",
     role: "Jefa de Recursos Humanos",
     company: "Hospital Regional de Concepción",
-    image: "/professional-woman-chilean.jpg",
+    image: `${import.meta.env.BASE_URL}professional-woman-chilean.jpg`,
     content:
       "El programa de comunicación empática transformó la dinámica de nuestro equipo. Ahora tenemos un ambiente laboral más saludable y colaborativo.",
     rating: 5,
@@ -19,7 +19,7 @@ const testimonials = [
     name: "Roberto Sepúlveda",
     role: "Director de Operaciones",
     company: "Empresa Portuaria Talcahuano",
-    image: "/professional-man-chilean-executive.jpg",
+    image: `${import.meta.env.BASE_URL}professional-man-chilean-executive.jpg`,
     content:
       "La metodología de LINAC es práctica y efectiva. Vimos resultados tangibles en el bienestar de nuestros colaboradores desde las primeras sesiones.",
     rating: 5,
@@ -28,7 +28,7 @@ const testimonials = [
     name: "María José Contreras",
     role: "Coordinadora de Capacitación",
     company: "Universidad del Biobío",
-    image: "/professional-woman-educator.jpg",
+    image: `${import.meta.env.BASE_URL}professional-woman-educator.jpg`,
     content:
       "Excelente trabajo en el diseño de programas a medida. Entendieron perfectamente nuestras necesidades y superaron nuestras expectativas.",
     rating: 5,
@@ -37,7 +37,7 @@ const testimonials = [
     name: "Andrés Valenzuela",
     role: "Gerente General",
     company: "Constructora del Sur",
-    image: "/professional-male-director-portrait.jpg",
+    image: `${import.meta.env.BASE_URL}professional-male-director-portrait.jpg`,
     content:
       "Los talleres de liderazgo fortalecieron nuestras competencias gerenciales. El equipo está más motivado y los resultados hablan por sí mismos.",
     rating: 5,
@@ -46,7 +46,7 @@ const testimonials = [
     name: "Patricia González",
     role: "Directora de Capacitación",
     company: "Clínica Bío Bío",
-    image: "/professional-female-coordinator-portrait.jpg",
+    image: `${import.meta.env.BASE_URL}professional-female-coordinator-portrait.jpg`,
     content:
       "Programas innovadores y personalizados. LINAC se preocupa genuinamente del desarrollo integral de las personas. Altamente recomendado.",
     rating: 5,
@@ -127,7 +127,7 @@ export function Testimonials() {
 
                     <div className="flex items-center gap-4 pt-4 border-t border-gray-100">
                       <img
-                        src={testimonial.image || "/placeholder.svg"}
+                        src={testimonial.image || `${import.meta.env.BASE_URL}placeholder.svg`}
                         alt={testimonial.name}
                         className="w-14 h-14 rounded-full object-cover ring-2 ring-[#316eb5]/20"
                       />

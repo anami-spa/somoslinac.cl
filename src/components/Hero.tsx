@@ -15,7 +15,7 @@ const featuredPrograms = [
     title: "BOOTCAMP de Contenido",
     subtitle: "¡Crea, graba y publica!",
     startDate: "8 de Enero 2025",
-    image: "/images/image.png",
+    image: `${import.meta.env.BASE_URL}images/image.png`,
     badge: "Inscripciones Abiertas",
     discount: "-20% DCTO",
     hasDiscount: true,
@@ -25,7 +25,7 @@ const featuredPrograms = [
     title: "Speak Easy Access!",
     subtitle: "Programa de Inglés",
     startDate: "15 de Enero 2025",
-    image: "/professional-training-academy-classroom-with-stude.jpg",
+    image: `${import.meta.env.BASE_URL}professional-training-academy-classroom-with-stude.jpg`,
     badge: "Cupos Limitados",
     discount: "",
     hasDiscount: false,
@@ -35,7 +35,7 @@ const featuredPrograms = [
     title: "¡Toma las Riendas!",
     subtitle: "Coaching con Caballos",
     startDate: "22 de Enero 2025",
-    image: "/emotional-intelligence-workshop.jpg",
+    image: `${import.meta.env.BASE_URL}emotional-intelligence-workshop.jpg`,
     badge: "Experiencia Vivencial",
     discount: "",
     hasDiscount: false,
@@ -45,7 +45,7 @@ const featuredPrograms = [
     title: "Oratoria y Comunicación Asertiva",
     subtitle: "Comunicación Efectiva",
     startDate: "29 de Enero 2025",
-    image: "/corporate-communication-training.jpg",
+    image: `${import.meta.env.BASE_URL}corporate-communication-training.jpg`,
     badge: "Inscripciones Abiertas",
     discount: "-15% DCTO",
     hasDiscount: true,
@@ -273,7 +273,7 @@ export function Hero() {
                       >
                         {/* Imagen promocional */}
                         <img
-                          src={program.image || "/placeholder.svg"}
+                          src={program.image || `${import.meta.env.BASE_URL}placeholder.svg`}
                           alt={`${program.title} - ${program.subtitle}`}
                           className="w-full h-auto object-cover"
                         />

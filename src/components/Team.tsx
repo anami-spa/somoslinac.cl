@@ -4,25 +4,25 @@ const team = [
   {
     name: "Dr. Carlos Mendoza",
     role: "Director Académico",
-    image: "/professional-male-director-portrait.jpg",
+    image: `${import.meta.env.BASE_URL}professional-male-director-portrait.jpg`,
     bio: "PhD en Administración de Empresas con 20 años de experiencia en formación ejecutiva.",
   },
   {
     name: "Lic. María González",
     role: "Coordinadora de Programas",
-    image: "/professional-female-coordinator-portrait.jpg",
+    image: `${import.meta.env.BASE_URL}professional-female-coordinator-portrait.jpg`,
     bio: "Especialista en diseño curricular y desarrollo de programas de liderazgo.",
   },
   {
     name: "Ing. Roberto Silva",
     role: "Director de Innovación",
-    image: "/professional-male-innovation-director-portrait.jpg",
+    image: `${import.meta.env.BASE_URL}professional-male-innovation-director-portrait.jpg`,
     bio: "Experto en transformación digital y metodologías ágiles de aprendizaje.",
   },
   {
     name: "Dra. Ana Martínez",
     role: "Especialista en Comunicación",
-    image: "/professional-female-communication-specialist-portr.jpg",
+    image: `${import.meta.env.BASE_URL}professional-female-communication-specialist-portr.jpg`,
     bio: "Consultora internacional en comunicación corporativa y oratoria ejecutiva.",
   },
 ]
@@ -43,7 +43,7 @@ export function Team() {
             <div key={index} className="group text-center">
               <div className="relative mb-6 overflow-hidden rounded-2xl">
                 <img
-                  src={member.image || "/placeholder.svg"}
+                  src={member.image || `${import.meta.env.BASE_URL}placeholder.svg`}
                   alt={member.name}
                   className="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-300"
                 />
