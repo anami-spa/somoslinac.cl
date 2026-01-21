@@ -1,0 +1,27 @@
+/* Estilos base para Laravel/Inertia.js con Tailwind CSS */
+/* Copia este archivo a resources/css/app.css en tu proyecto Laravel */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-slate-200;
+  }
+
+  body {
+    @apply bg-white text-slate-900 antialiased;
+  }
+}
+
+/* Estilos adicionales para smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}

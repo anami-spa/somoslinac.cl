@@ -1,0 +1,75 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# Testing
+/coverage
+
+# Next.js
+/.next/
+/out/
+next-env.d.ts
+
+# Production
+/build
+/dist
+
+# Misc
+.DS_Store
+*.pem
+.sessions/
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local env files
+.env*.local
+.env
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Optional: Lock files (uncomment the ones you want to ignore)
+# If using npm, keep package-lock.json and ignore the others
+pnpm-lock.yaml
+yarn.lock
+# If using pnpm, keep pnpm-lock.yaml and ignore the others
+# package-lock.json
+# yarn.lock
+# If using yarn, keep yarn.lock and ignore the others
+# package-lock.json
+# pnpm-lock.yaml
+
+# Screenshots (optional - uncomment if you don't want to version them)
+# /screenshots/
