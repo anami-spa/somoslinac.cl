@@ -16,7 +16,8 @@ nextjs-portal {
 
 @layer base {
   :root {
-    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    /* Tipografía LINAC - Bahnschrift para títulos y cuerpo según normas gráficas */
+    --font-sans: 'Bahnschrift', 'Barlow', 'Segoe UI', system-ui, -apple-system, sans-serif;
     --font-mono: ui-monospace, 'Courier New', monospace;
     /* Nueva paleta de colores LINAC según manual de marca */
     /* Azules corporativos */

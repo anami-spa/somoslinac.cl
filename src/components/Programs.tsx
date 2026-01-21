@@ -141,15 +141,11 @@ export function Programs({ onProgramSelect }: ProgramsProps) {
                     <img
                       src={program.image}
                       alt={program.title}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
 
                     {/* Overlay con gradiente */}
                     <div className={`absolute inset-0 bg-gradient-to-r ${program.gradient} opacity-90`} />
-
-                    {/* Efectos decorativos */}
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
-                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2" />
 
                     {/* Contenido */}
                     <div className="relative z-10 h-full flex flex-col justify-end p-6">
@@ -175,10 +171,9 @@ export function Programs({ onProgramSelect }: ProgramsProps) {
                   <div className="p-6">
                     {/* Badge */}
                     <span
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full mb-4"
+                      className="inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-full mb-4"
                       style={{ backgroundColor: `${program.accentColor}15`, color: program.accentColor }}
                     >
-                      <Sparkles size={12} />
                       {program.badge}
                     </span>
 
