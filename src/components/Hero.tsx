@@ -16,16 +16,36 @@ const featuredPrograms = [
     discount: "-20% DCTO",
     hasDiscount: true,
   },
-  // Puedes agregar más cursos aquí
-  // {
-  //   id: "speak-easy-access",
-  //   title: "Speak Easy Access!",
-  //   subtitle: "Programa de Inglés",
-  //   startDate: "15 de Enero 2025",
-  //   image: "/professional-training-academy-classroom-with-stude.jpg",
-  //   badge: "Cupos Limitados",
-  //   hasDiscount: false,
-  // },
+  {
+    id: "speak-easy-access",
+    title: "Speak Easy Access!",
+    subtitle: "Programa de Inglés",
+    startDate: "15 de Enero 2025",
+    image: "/professional-training-academy-classroom-with-stude.jpg",
+    badge: "Cupos Limitados",
+    discount: "",
+    hasDiscount: false,
+  },
+  {
+    id: "toma-las-riendas",
+    title: "¡Toma las Riendas!",
+    subtitle: "Coaching con Caballos",
+    startDate: "22 de Enero 2025",
+    image: "/emotional-intelligence-workshop.jpg",
+    badge: "Experiencia Vivencial",
+    discount: "",
+    hasDiscount: false,
+  },
+  {
+    id: "oratoria-comunicacion",
+    title: "Oratoria y Comunicación Asertiva",
+    subtitle: "Comunicación Efectiva",
+    startDate: "29 de Enero 2025",
+    image: "/corporate-communication-training.jpg",
+    badge: "Inscripciones Abiertas",
+    discount: "-15% DCTO",
+    hasDiscount: true,
+  },
 ]
 
 export function Hero() {
