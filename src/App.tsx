@@ -3,6 +3,7 @@ import { Navigation } from "@/components/Navigation"
 import { WhatsAppButton } from "@/components/WhatsAppButton"
 import { HomePage } from "@/pages/HomePage"
 import { ProgramDetailPage } from "@/pages/ProgramDetailPage"
+import { InscripcionPage } from "@/pages/InscripcionPage"
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/programas/:programId" element={<ProgramDetailPage />} />
+          <Route path="/inscripcion/:programId" element={<InscripcionPage />} />
         </Routes>
         <WhatsAppButton />
       </div>

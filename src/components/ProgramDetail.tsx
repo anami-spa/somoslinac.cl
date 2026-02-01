@@ -497,7 +497,7 @@ export default function ProgramDetail() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => navigate(`/inscripcion/${programId}`)}
                 className={`inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-lg shadow-lg transition-all duration-300 ${
                   program.textDark
                     ? "bg-[#233a63] text-white hover:bg-[#1a2d4d]"
@@ -702,7 +702,7 @@ export default function ProgramDetail() {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => navigate(`/inscripcion/${programId}`)}
                 className="w-full py-4 px-6 bg-[#316eb5] text-white font-bold rounded-xl hover:bg-[#254e8a] transition-colors shadow-lg"
               >
                 Inscríbete Ahora
