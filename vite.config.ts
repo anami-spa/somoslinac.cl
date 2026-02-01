@@ -22,7 +22,7 @@ export default defineConfig(({ mode }) => ({
       output: {
         manualChunks: {
           // React y ReactDOM en un chunk separado
-          'react-vendor': ['react', 'react-dom'],
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
           // Componentes UI de Radix en un chunk
           'ui-vendor': [
             '@radix-ui/react-dialog',

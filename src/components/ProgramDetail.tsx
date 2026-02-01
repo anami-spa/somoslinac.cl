@@ -3,6 +3,7 @@ import type React from "react"
 
 import { motion } from "framer-motion"
 import { useState } from "react"
+import { useParams, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
@@ -345,12 +346,9 @@ const programsData = {
   },
 }
 
-interface ProgramDetailProps {
-  programId: string
-  onBack?: () => void
-}
-
-export function ProgramDetail({ programId, onBack }: ProgramDetailProps) {
+export default function ProgramDetail() {
+  const { programId } = useParams<{ programId: string }>()
+  const navigate = useNavigate()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [registrationStep, setRegistrationStep] = useState(1)
 
@@ -423,7 +421,7 @@ export function ProgramDetail({ programId, onBack }: ProgramDetailProps) {
       <div className="bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <nav className="flex items-center gap-2 text-sm">
-            <button onClick={onBack} className="text-[#316eb5] hover:text-[#254e8a] transition-colors">
+            <button onClick={() => navigate('/')} className="text-[#316eb5] hover:text-[#254e8a] transition-colors">
               Inicio
             </button>
             <ChevronRight size={16} className="text-gray-400" />
@@ -1058,5 +1056,3 @@ export function ProgramDetail({ programId, onBack }: ProgramDetailProps) {
     </div>
   )
 }
-
-export default ProgramDetail

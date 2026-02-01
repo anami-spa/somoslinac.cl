@@ -2,10 +2,16 @@
 import { Menu, X } from "lucide-react"
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useNavigate, useLocation } from "react-router-dom"
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  // Detectar si estamos en la página home
+  const isHomePage = location.pathname === '/' || location.pathname === import.meta.env.BASE_URL
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,11 +21,39 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  const handleNavigation = (id: string) => {
+    if (!isHomePage) {
+      // Si estamos en página de detalle, volver al home y hacer scroll
+      navigate('/', { state: { scrollTo: id } })
+    } else {
+      // Si estamos en home, hacer scroll directo
+      scrollToSection(id)
+    }
+  }
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
       setIsOpen(false)
+    }
+  }
+
+  // Efecto para hacer scroll cuando volvemos del detalle
+  useEffect(() => {
+    if (isHomePage && location.state?.scrollTo) {
+      // Esperar a que el DOM se actualice
+      setTimeout(() => {
+        scrollToSection(location.state.scrollTo)
+      }, 100)
+    }
+  }, [isHomePage, location.state])
+
+  const handleLogoClick = () => {
+    if (!isHomePage) {
+      navigate('/')
+    } else {
+      scrollToSection("inicio")
     }
   }
 
@@ -41,7 +75,7 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <motion.button
-            onClick={() => scrollToSection("inicio")}
+            onClick={handleLogoClick}
             className="flex-shrink-0 cursor-pointer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -55,7 +89,7 @@ export function Navigation() {
             {navItems.map((item) => (
               <motion.button
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
+                onClick={() => handleNavigation(item.id)}
                 className="font-medium text-[#233a63] hover:text-[#316eb5] transition-colors duration-200"
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.95 }}
@@ -64,7 +98,7 @@ export function Navigation() {
               </motion.button>
             ))}
             <motion.button
-              onClick={() => scrollToSection("contacto")}
+              onClick={() => handleNavigation("contacto")}
               className="bg-[#FBEA24] text-[#233a63] px-6 py-2.5 rounded-full font-semibold hover:bg-[#FFEA4A] transition-colors duration-200 shadow-lg shadow-[#FBEA24]/30"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -96,7 +130,7 @@ export function Navigation() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  onClick={() => scrollToSection(item.id)}
+                  onClick={() => handleNavigation(item.id)}
                   className="block w-full text-left px-4 py-3 text-[#233a63] hover:text-[#316eb5] hover:bg-[#f5f9ff] rounded-lg font-medium"
                 >
                   {item.label}
@@ -106,7 +140,7 @@ export function Navigation() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navItems.length * 0.1 }}
-                onClick={() => scrollToSection("contacto")}
+                onClick={() => handleNavigation("contacto")}
                 className="block w-full text-center px-4 py-3 bg-[#FBEA24] text-[#233a63] rounded-lg font-semibold mt-2"
               >
                 Inscríbete

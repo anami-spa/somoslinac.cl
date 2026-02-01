@@ -47,8 +47,11 @@ npm run lint          # Ejecutar ESLint en el proyecto
 ├── index.html              # Punto de entrada HTML (Vite)
 ├── src/
 │   ├── main.tsx           # Punto de entrada de React
-│   ├── App.tsx            # Componente principal con navegación por estado
+│   ├── App.tsx            # Componente principal con React Router
 │   ├── globals.css        # Estilos globales y variables CSS LINAC
+│   ├── pages/             # Páginas de la aplicación
+│   │   ├── HomePage.tsx
+│   │   └── ProgramDetailPage.tsx
 │   ├── components/        # Componentes de la aplicación
 │   │   ├── Navigation.tsx
 │   │   ├── Hero.tsx
@@ -92,13 +95,21 @@ El proyecto tiene **un solo directorio de componentes** en `src/components/`:
 
 ### Flujo de Navegación
 
-El proyecto usa **navegación por estados** en lugar de routing tradicional:
+El proyecto usa **React Router** para navegación entre páginas:
 
-- `src/App.tsx` maneja dos vistas principales:
-  - Vista Home: muestra todos los componentes de sección
-  - Vista Program Detail: cuando se selecciona un programa
-- La navegación dentro de Home usa `scrollIntoView` para desplazamiento suave entre secciones
+#### Rutas Disponibles
+- `/` - Página principal (HomePage)
+- `/programas/:programId` - Detalle de programa (ProgramDetailPage)
+
+#### Características de Navegación
+- `src/App.tsx` configura BrowserRouter con `basename={import.meta.env.BASE_URL}`
+- Navigation.tsx detecta la página actual y ajusta comportamiento:
+  - En HomePage: los links hacen scroll suave a secciones (`scrollIntoView`)
+  - En ProgramDetailPage: los links navegan a home y luego hacen scroll
+  - El logo siempre vuelve al home
+- La navegación dentro de Home usa `scrollIntoView` para desplazamiento suave
 - Identificadores de sección: `inicio`, `programas`, `metodologia`, `contacto`
+- IDs de programas: `speak-easy-access`, `toma-las-riendas`, `oratoria-comunicacion`, `bootcamp-contenido`
 
 ### Sistema de Colores LINAC
 

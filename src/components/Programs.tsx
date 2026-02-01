@@ -2,6 +2,7 @@
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { Globe, Heart, Mic, Clock, Sparkles, ArrowRight, Check, Video } from "lucide-react"
 
 export const programs = [
@@ -87,14 +88,11 @@ export const programs = [
   },
 ]
 
-interface ProgramsProps {
-  onProgramSelect?: (programId: string) => void
-}
-
-export function Programs({ onProgramSelect }: ProgramsProps) {
+export function Programs() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [hoveredCard, setHoveredCard] = useState<string | null>(null)
+  const navigate = useNavigate()
 
   return (
     <section id="programas" className="py-24 bg-gradient-to-b from-[#f5f9ff] to-white" ref={ref}>
@@ -213,7 +211,7 @@ export function Programs({ onProgramSelect }: ProgramsProps) {
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      onClick={() => onProgramSelect?.(program.id)}
+                      onClick={() => navigate(`/programas/${program.id}`)}
                       className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-semibold transition-all duration-300"
                       style={{
                         backgroundColor: isHovered ? program.accentColor : "transparent",
