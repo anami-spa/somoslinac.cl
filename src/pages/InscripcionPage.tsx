@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -19,6 +19,10 @@ import {
   Heart,
   Mic,
   Video,
+  Upload,
+  ExternalLink,
+  Copy,
+  AlertCircle,
 } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -70,37 +74,81 @@ const programsData = {
     title: "Speak Easy Access!",
     subtitle: "Programa de Inglés",
     price: "$180.000 CLP",
+    priceNumber: 180000,
     icon: Globe,
     gradient: "from-[#316eb5] to-[#254e8a]",
     accentColor: "#316eb5",
+    paymentLink: "https://www.flow.cl/btn.php?token=EXAMPLE_TOKEN_1",
+    paymentInfo: {
+      bank: "Banco Santander",
+      accountType: "Cuenta corriente",
+      rut: "77.631.728-4",
+      name: "LINAC Capacitaciones SPA",
+      accountNumber: "89017866",
+      email: "linaccapacitaciones@gmail.com",
+      note: "Indicar en el mensaje: SPEAK EASY ACCESS + tu nombre",
+    },
   },
   "toma-las-riendas": {
     id: "toma-las-riendas",
     title: "¡Toma las Riendas!",
     subtitle: "Coaching con Caballos",
     price: "$220.000 CLP",
+    priceNumber: 220000,
     icon: Heart,
     gradient: "from-[#3CAA36] to-[#2d8a2a]",
     accentColor: "#3CAA36",
+    paymentLink: "https://www.flow.cl/btn.php?token=EXAMPLE_TOKEN_2",
+    paymentInfo: {
+      bank: "Banco Santander",
+      accountType: "Cuenta corriente",
+      rut: "77.631.728-4",
+      name: "LINAC Capacitaciones SPA",
+      accountNumber: "89017866",
+      email: "linaccapacitaciones@gmail.com",
+      note: "Indicar en el mensaje: TOMA LAS RIENDAS + tu nombre",
+    },
   },
   "oratoria-comunicacion": {
     id: "oratoria-comunicacion",
     title: "Oratoria, Empoderamiento y Comunicación Asertiva",
     subtitle: "Comunicación Efectiva",
     price: "$250.000 CLP",
+    priceNumber: 250000,
     icon: Mic,
     gradient: "from-[#FBEA24] to-[#e6d520]",
     accentColor: "#FBEA24",
+    paymentLink: "https://www.flow.cl/btn.php?token=EXAMPLE_TOKEN_3",
+    paymentInfo: {
+      bank: "Banco Santander",
+      accountType: "Cuenta corriente",
+      rut: "77.631.728-4",
+      name: "LINAC Capacitaciones SPA",
+      accountNumber: "89017866",
+      email: "linaccapacitaciones@gmail.com",
+      note: "Indicar en el mensaje: ORATORIA + tu nombre",
+    },
   },
   "bootcamp-contenido": {
     id: "bootcamp-contenido",
     title: "BOOTCAMP de Contenido",
     subtitle: "¡Crea, graba y publica!",
     price: "$60.000 CLP",
+    priceNumber: 60000,
     originalPrice: "$75.000 CLP",
     icon: Video,
     gradient: "from-[#E91E63] to-[#9C27B0]",
     accentColor: "#E91E63",
+    paymentLink: "https://www.flow.cl/btn.php?token=EXAMPLE_TOKEN_4",
+    paymentInfo: {
+      bank: "Banco Santander",
+      accountType: "Cuenta corriente",
+      rut: "77.631.728-4",
+      name: "LINAC Capacitaciones SPA",
+      accountNumber: "89017866",
+      email: "linaccapacitaciones@gmail.com",
+      note: "Indicar en el mensaje: BOOTCAMP de CONTENIDO + tu nombre",
+    },
   },
 }
 
@@ -109,6 +157,12 @@ export function InscripcionPage() {
   const navigate = useNavigate()
   const [step, setStep] = useState(1)
   const [submittedData, setSubmittedData] = useState<RegistrationFormData | null>(null)
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null)
+  const [uploadedFilePreview, setUploadedFilePreview] = useState<string | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [copiedField, setCopiedField] = useState<string | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const program = programsData[programId as keyof typeof programsData]
 
@@ -128,10 +182,121 @@ export function InscripcionPage() {
 
   const registrationType = watch("registrationType")
 
-  const onSubmit = (data: RegistrationFormData) => {
+  const onSubmit = async (data: RegistrationFormData) => {
     console.log("Formulario enviado:", data)
     setSubmittedData(data)
+
+    // Enviar a Formspree
+    try {
+      const formData = {
+        ...data,
+        programa: program.title,
+        precio: program.price,
+        timestamp: new Date().toISOString(),
+      }
+
+      await fetch("https://formspree.io/f/xdadzwdd", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      console.log("Datos enviados a Formspree exitosamente")
+    } catch (error) {
+      console.error("Error al enviar a Formspree:", error)
+      // Continuamos aunque falle el envío
+    }
+
     setStep(2)
+  }
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (file) {
+      // Validar tipo de archivo (imágenes y PDFs)
+      const validTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp", "application/pdf"]
+      if (!validTypes.includes(file.type)) {
+        alert("Por favor, sube solo imágenes (JPG, PNG, WEBP) o PDFs")
+        return
+      }
+
+      // Validar tamaño (máx 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        alert("El archivo no debe superar los 5MB")
+        return
+      }
+
+      setUploadedFile(file)
+
+      // Crear preview para imágenes
+      if (file.type.startsWith("image/")) {
+        const reader = new FileReader()
+        reader.onloadend = () => {
+          setUploadedFilePreview(reader.result as string)
+        }
+        reader.readAsDataURL(file)
+      } else {
+        setUploadedFilePreview(null)
+      }
+    }
+  }
+
+  const handleSubmitProof = async () => {
+    if (!uploadedFile || !submittedData) {
+      alert("Por favor, carga tu comprobante de pago")
+      return
+    }
+
+    setIsSubmitting(true)
+
+    try {
+      // Convertir archivo a base64
+      const reader = new FileReader()
+      reader.onloadend = async () => {
+        const base64File = reader.result as string
+
+        // Enviar comprobante a Formspree
+        const proofData = {
+          programa: program.title,
+          participante: submittedData.fullName,
+          email: submittedData.email,
+          rut: submittedData.rut,
+          telefono: submittedData.phone,
+          tipoInscripcion: submittedData.registrationType,
+          precio: program.price,
+          archivoNombre: uploadedFile.name,
+          archivoTipo: uploadedFile.type,
+          archivoTamaño: `${(uploadedFile.size / 1024).toFixed(2)} KB`,
+          mensaje: "Comprobante de pago adjunto",
+          timestamp: new Date().toLocaleString("es-CL"),
+        }
+
+        await fetch("https://formspree.io/f/xdadzwdd", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(proofData),
+        })
+
+        setSubmitSuccess(true)
+        setIsSubmitting(false)
+      }
+
+      reader.readAsDataURL(uploadedFile)
+    } catch (error) {
+      console.error("Error al enviar comprobante:", error)
+      alert("Hubo un error al enviar el comprobante. Por favor, intenta de nuevo.")
+      setIsSubmitting(false)
+    }
+  }
+
+  const copyToClipboard = (text: string, field: string) => {
+    navigator.clipboard.writeText(text)
+    setCopiedField(field)
+    setTimeout(() => setCopiedField(null), 2000)
   }
 
   if (!program) {
@@ -438,95 +603,227 @@ export function InscripcionPage() {
                 </button>
               </div>
             </form>
-          ) : (
-            /* Paso 2: Confirmación */
+          ) : submitSuccess ? (
+            /* Vista de Éxito */
             <div className="p-8 lg:p-10 space-y-8">
-              <div className="text-center mb-8">
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 mb-6">
+                  <CheckCircle2 className="text-green-600" size={40} />
+                </div>
+                <h2 className="text-3xl font-bold text-[#233a63] mb-3">¡Inscripción Completada!</h2>
+                <p className="text-lg text-gray-600 mb-8">
+                  Hemos recibido tu comprobante de pago. Te contactaremos pronto al email{" "}
+                  <span className="font-semibold text-[#316eb5]">{submittedData?.email}</span>
+                </p>
+
+                <div className="max-w-md mx-auto bg-green-50 border border-green-200 rounded-xl p-6 mb-8">
+                  <h3 className="font-semibold text-green-800 mb-2">Próximos pasos</h3>
+                  <ul className="text-sm text-green-700 text-left space-y-2">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 size={16} className="mt-0.5 flex-shrink-0" />
+                      <span>Recibirás un email de confirmación en las próximas horas</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 size={16} className="mt-0.5 flex-shrink-0" />
+                      <span>Verificaremos tu pago y te enviaremos los detalles del programa</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 size={16} className="mt-0.5 flex-shrink-0" />
+                      <span>Si tienes dudas, contáctanos a linaccapacitaciones@gmail.com</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => navigate("/")}
+                  className="px-10 py-4 bg-gradient-to-r from-[#316eb5] to-[#254e8a] text-white font-semibold rounded-xl hover:from-[#254e8a] hover:to-[#1a3a5c] transition-all duration-300 shadow-lg hover:shadow-xl"
+                >
+                  Volver al Inicio
+                </button>
+              </div>
+            </div>
+          ) : (
+            /* Paso 2: Pago y Comprobante */
+            <div className="p-8 lg:p-10 space-y-8">
+              <div className="text-center mb-6">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 mb-4">
                   <CheckCircle2 className="text-green-600" size={32} />
                 </div>
-                <h2 className="text-2xl font-bold text-[#233a63] mb-2">¡Inscripción Recibida!</h2>
+                <h2 className="text-2xl font-bold text-[#233a63] mb-2">¡Inscripción Registrada!</h2>
                 <p className="text-gray-600">
-                  Hemos recibido tu solicitud de inscripción. A continuación, selecciona tu método de pago preferido.
+                  Completa tu pago y carga el comprobante para finalizar tu inscripción
                 </p>
               </div>
 
               {/* Resumen */}
               <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
                 <h3 className="font-semibold text-[#233a63] mb-4">Resumen de tu inscripción</h3>
-                <div className="space-y-3">
-                  <div className="flex justify-between">
+                <div className="space-y-2.5">
+                  <div className="flex justify-between text-sm">
                     <span className="text-gray-600">Programa:</span>
                     <span className="font-medium text-[#233a63]">{program.title}</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between text-sm">
                     <span className="text-gray-600">Participante:</span>
                     <span className="font-medium text-[#233a63]">{submittedData?.fullName}</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between text-sm">
                     <span className="text-gray-600">Email:</span>
                     <span className="font-medium text-[#233a63]">{submittedData?.email}</span>
                   </div>
                   <div className="flex justify-between pt-3 border-t border-gray-300">
-                    <span className="text-gray-600 font-semibold">Total a pagar:</span>
-                    <span className="font-bold text-xl text-[#316eb5]">{program.price}</span>
+                    <span className="text-gray-700 font-semibold">Total a pagar:</span>
+                    <span className="font-bold text-2xl text-[#316eb5]">{program.price}</span>
                   </div>
                 </div>
               </div>
 
-              {/* Métodos de Pago */}
-              <div className="space-y-4">
-                <h3 className="font-semibold text-[#233a63] flex items-center gap-2">
+              {/* Opciones de Pago */}
+              <div className="space-y-5">
+                <h3 className="font-semibold text-[#233a63] text-lg flex items-center gap-2">
                   <CreditCard size={20} className="text-[#316eb5]" />
-                  Selecciona tu método de pago
+                  Opciones de Pago
                 </h3>
 
-                <div className="grid gap-3">
-                  {[
-                    {
-                      name: "WebPay",
-                      desc: "Tarjeta de crédito o débito",
-                      color: "#00A6E0",
-                      icon: CreditCard,
-                    },
-                    {
-                      name: "PayPal",
-                      desc: "Pago internacional seguro",
-                      color: "#003087",
-                      icon: null,
-                    },
-                    {
-                      name: "Transferencia Bancaria",
-                      desc: "Transferencia directa",
-                      color: "#233a63",
-                      icon: Banknote,
-                    },
-                  ].map((method) => (
-                    <button
-                      key={method.name}
-                      type="button"
-                      className="w-full p-4 border-2 border-gray-200 rounded-xl hover:border-[#316eb5] hover:bg-gray-50 transition-all flex items-center gap-4 text-left group"
-                    >
-                      <div
-                        className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0"
-                        style={{ backgroundColor: method.color }}
+                {/* Link de Pago Online */}
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-xl p-5">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center flex-shrink-0">
+                      <CreditCard className="text-white" size={24} />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-[#233a63] mb-1">Pago Online (Recomendado)</h4>
+                      <p className="text-sm text-gray-600 mb-3">
+                        Paga con tarjeta de crédito o débito de forma segura
+                      </p>
+                      <a
+                        href={program.paymentLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-6 py-2.5 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all shadow-md hover:shadow-lg"
                       >
-                        {method.icon ? (
-                          <method.icon className="text-white" size={24} />
-                        ) : (
-                          <span className="text-white font-bold">PP</span>
-                        )}
+                        Ir a Pagar Ahora
+                        <ExternalLink size={18} />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Transferencia Bancaria */}
+                <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="w-12 h-12 rounded-lg bg-[#233a63] flex items-center justify-center flex-shrink-0">
+                      <Banknote className="text-white" size={24} />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-[#233a63] mb-1">Transferencia Bancaria</h4>
+                      <p className="text-sm text-gray-600">Transfiere a nuestra cuenta bancaria</p>
+                    </div>
+                  </div>
+
+                  <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                    {[
+                      { label: "Banco", value: program.paymentInfo.bank },
+                      { label: "Tipo de cuenta", value: program.paymentInfo.accountType },
+                      { label: "RUT", value: program.paymentInfo.rut },
+                      { label: "Titular", value: program.paymentInfo.name },
+                      { label: "N° Cuenta", value: program.paymentInfo.accountNumber },
+                      { label: "Email", value: program.paymentInfo.email },
+                    ].map((item) => (
+                      <div key={item.label} className="flex items-center justify-between gap-3">
+                        <span className="text-sm text-gray-600 min-w-[100px]">{item.label}:</span>
+                        <span className="font-medium text-[#233a63] flex-1">{item.value}</span>
+                        <button
+                          type="button"
+                          onClick={() => copyToClipboard(item.value, item.label)}
+                          className="p-2 hover:bg-gray-200 rounded-lg transition-colors"
+                          title="Copiar"
+                        >
+                          {copiedField === item.label ? (
+                            <CheckCircle2 size={16} className="text-green-600" />
+                          ) : (
+                            <Copy size={16} className="text-gray-500" />
+                          )}
+                        </button>
                       </div>
-                      <div>
-                        <p className="font-semibold text-[#233a63] group-hover:text-[#316eb5]">{method.name}</p>
-                        <p className="text-sm text-gray-500">{method.desc}</p>
-                      </div>
-                    </button>
-                  ))}
+                    ))}
+                  </div>
+
+                  <div className="mt-4 bg-amber-50 border border-amber-200 rounded-lg p-3 flex items-start gap-2">
+                    <AlertCircle size={18} className="text-amber-600 flex-shrink-0 mt-0.5" />
+                    <p className="text-sm text-amber-800">
+                      <strong>Importante:</strong> {program.paymentInfo.note}
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              {/* Botones */}
+              {/* Carga de Comprobante */}
+              <div className="space-y-4 pt-6 border-t-2 border-gray-100">
+                <h3 className="font-semibold text-[#233a63] text-lg flex items-center gap-2">
+                  <Upload size={20} className="text-[#316eb5]" />
+                  Comprobante de Pago
+                </h3>
+
+                <p className="text-sm text-gray-600">
+                  Una vez realizado el pago, carga tu comprobante (imagen o PDF, máx 5MB)
+                </p>
+
+                <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-[#316eb5] transition-colors">
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*,.pdf"
+                    onChange={handleFileUpload}
+                    className="hidden"
+                  />
+
+                  {uploadedFile ? (
+                    <div className="space-y-4">
+                      {uploadedFilePreview && (
+                        <img
+                          src={uploadedFilePreview}
+                          alt="Preview"
+                          className="max-w-xs mx-auto rounded-lg shadow-md"
+                        />
+                      )}
+                      <div className="flex items-center justify-center gap-3">
+                        <CheckCircle2 className="text-green-600" size={24} />
+                        <div className="text-left">
+                          <p className="font-medium text-[#233a63]">{uploadedFile.name}</p>
+                          <p className="text-sm text-gray-500">
+                            {(uploadedFile.size / 1024).toFixed(2)} KB
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => fileInputRef.current?.click()}
+                        className="text-sm text-[#316eb5] hover:underline"
+                      >
+                        Cambiar archivo
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      <Upload size={48} className="mx-auto text-gray-400" />
+                      <div>
+                        <button
+                          type="button"
+                          onClick={() => fileInputRef.current?.click()}
+                          className="px-6 py-2 bg-[#316eb5] text-white font-semibold rounded-lg hover:bg-[#254e8a] transition-colors"
+                        >
+                          Seleccionar Archivo
+                        </button>
+                        <p className="text-sm text-gray-500 mt-2">o arrastra y suelta aquí</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Botones Finales */}
               <div className="flex items-center justify-between pt-6 border-t-2 border-gray-100">
                 <button
                   type="button"
@@ -539,10 +836,21 @@ export function InscripcionPage() {
 
                 <button
                   type="button"
-                  onClick={() => navigate("/")}
-                  className="px-8 py-3 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+                  onClick={handleSubmitProof}
+                  disabled={!uploadedFile || isSubmitting}
+                  className="flex items-center gap-2 px-8 py-3 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
                 >
-                  Finalizar
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      Enviando...
+                    </>
+                  ) : (
+                    <>
+                      Enviar Comprobante
+                      <ArrowRight size={20} />
+                    </>
+                  )}
                 </button>
               </div>
             </div>
