@@ -1,64 +1,7 @@
-import { ArrowRight, CheckCircle, ChevronLeft, ChevronRight } from "lucide-react"
+import { ArrowRight, CheckCircle, Sparkles, BookOpen, Users } from "lucide-react"
 import { motion } from "framer-motion"
-import { useState, useEffect, useCallback } from "react"
-import useEmblaCarousel from "embla-carousel-react"
-import { useNavigate } from "react-router-dom"
-
-// Cursos destacados mini-slider
-const featuredPrograms = [
-  {
-    id: "bootcamp-contenido",
-    title: "BOOTCAMP de Contenido",
-    image: `${import.meta.env.BASE_URL}images/image.png`,
-    badge: "20% DCTO",
-  },
-  {
-    id: "speak-easy-access",
-    title: "Speak Easy Access!",
-    image: `${import.meta.env.BASE_URL}professional-training-academy-classroom-with-stude.jpg`,
-    badge: "Cupos Limitados",
-  },
-  {
-    id: "toma-las-riendas",
-    title: "¡Toma las Riendas!",
-    image: `${import.meta.env.BASE_URL}emotional-intelligence-workshop.jpg`,
-    badge: "Experiencial",
-  },
-  {
-    id: "oratoria-comunicacion",
-    title: "Oratoria",
-    image: `${import.meta.env.BASE_URL}corporate-communication-training.jpg`,
-    badge: "Inscripciones",
-  },
-]
 
 export function HeroSlide1() {
-  const navigate = useNavigate()
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
-  const [selectedIndex, setSelectedIndex] = useState(0)
-
-  const scrollPrev = useCallback(() => {
-    if (emblaApi) emblaApi.scrollPrev()
-  }, [emblaApi])
-
-  const scrollNext = useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext()
-  }, [emblaApi])
-
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return
-    setSelectedIndex(emblaApi.selectedScrollSnap())
-  }, [emblaApi])
-
-  useEffect(() => {
-    if (!emblaApi) return
-    onSelect()
-    emblaApi.on("select", onSelect)
-    return () => {
-      emblaApi.off("select", onSelect)
-    }
-  }, [emblaApi, onSelect])
-
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
@@ -172,7 +115,7 @@ export function HeroSlide1() {
               </motion.div>
             </motion.div>
 
-            {/* Mini slider de programas */}
+            {/* Imagen de prueba con diseño decorativo */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -180,62 +123,78 @@ export function HeroSlide1() {
               className="relative"
             >
               <div className="relative">
-                {/* Slider */}
-                <div className="overflow-hidden rounded-3xl" ref={emblaRef}>
-                  <div className="flex">
-                    {featuredPrograms.map((program) => (
-                      <div key={program.id} className="flex-[0_0_100%] px-2">
-                        <div
-                          onClick={() => navigate(`/programas/${program.id}`)}
-                          className="relative h-[500px] rounded-2xl overflow-hidden cursor-pointer group"
-                        >
-                          <img
-                            src={program.image}
-                            alt={program.title}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-[#233a63]/90 via-[#233a63]/40 to-transparent" />
-                          <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                            <div className="inline-block px-3 py-1 bg-[#FBEA24] text-[#233a63] text-xs font-bold rounded-full mb-3">
-                              {program.badge}
-                            </div>
-                            <h3 className="text-2xl font-bold mb-2">{program.title}</h3>
-                            <div className="flex items-center gap-2 text-sm opacity-90">
-                              <ArrowRight size={16} />
-                              Ver detalles
-                            </div>
-                          </div>
-                        </div>
+                {/* Efecto de fondo */}
+                <div className="absolute -inset-4 bg-gradient-to-br from-[#316eb5]/20 to-[#65A5CD]/20 rounded-3xl blur-2xl" />
+
+                {/* Imagen principal o placeholder */}
+                <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#316eb5] to-[#254e8a] h-[500px] flex items-center justify-center">
+                  {/* Patrón de fondo decorativo */}
+                  <div
+                    className="absolute inset-0 opacity-10"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+                    }}
+                  />
+
+                  {/* Contenido del placeholder */}
+                  <div className="relative z-10 text-center text-white p-8">
+                    {/* Iconos decorativos */}
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ duration: 0.6, delay: 0.7 }}
+                      className="flex items-center justify-center gap-6 mb-8"
+                    >
+                      <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
+                        <BookOpen size={40} className="text-[#FBEA24]" />
                       </div>
-                    ))}
-                  </div>
-                </div>
+                      <div className="w-24 h-24 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                        <Sparkles size={48} className="text-white" />
+                      </div>
+                      <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
+                        <Users size={40} className="text-[#FBEA24]" />
+                      </div>
+                    </motion.div>
 
-                {/* Controles */}
-                <button
-                  onClick={scrollPrev}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm shadow-lg flex items-center justify-center hover:bg-white transition-all z-10"
-                >
-                  <ChevronLeft size={20} className="text-[#233a63]" />
-                </button>
-                <button
-                  onClick={scrollNext}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm shadow-lg flex items-center justify-center hover:bg-white transition-all z-10"
-                >
-                  <ChevronRight size={20} className="text-[#233a63]" />
-                </button>
+                    {/* Texto */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.9 }}
+                    >
+                      <h3 className="text-3xl font-bold mb-4">LINAC</h3>
+                      <p className="text-lg opacity-90 max-w-md mx-auto">
+                        Liderazgo e Innovación en Nuevas Áreas de Capacitación
+                      </p>
+                      <div className="mt-6 inline-block px-6 py-2 bg-[#FBEA24] text-[#233a63] rounded-full font-bold text-sm">
+                        Imagen de prueba
+                      </div>
+                    </motion.div>
 
-                {/* Dots */}
-                <div className="flex justify-center gap-2 mt-4">
-                  {featuredPrograms.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => emblaApi?.scrollTo(index)}
-                      className={`w-2 h-2 rounded-full transition-all ${
-                        index === selectedIndex ? "bg-[#316eb5] w-8" : "bg-gray-300"
-                      }`}
+                    {/* Elementos decorativos flotantes */}
+                    <motion.div
+                      animate={{
+                        y: [0, -10, 0],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      className="absolute top-8 right-8 w-16 h-16 rounded-full bg-[#FBEA24]/30 blur-xl"
                     />
-                  ))}
+                    <motion.div
+                      animate={{
+                        y: [0, 10, 0],
+                      }}
+                      transition={{
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      className="absolute bottom-8 left-8 w-20 h-20 rounded-full bg-white/20 blur-xl"
+                    />
+                  </div>
                 </div>
               </div>
             </motion.div>
