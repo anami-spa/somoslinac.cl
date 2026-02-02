@@ -91,7 +91,7 @@ const programsData = {
     gradient: "from-[#316eb5] to-[#254e8a]",
     accentColor: "#316eb5",
     description:
-      "El inglés es una herramienta clave para acceder a mejores oportunidades, ampliar redes de contacto y proyectar una imagen segura y profesional. Este programa está diseñado para personas que desean superar sus barreras con el idioma y desarrollar confianza al comunicarse en contextos personales y laborales.",
+      "El inglés es una herramienta clave para acceder a mejores oportunidades, ampliar redes de contacto y proyectar una imagen segura y profesional. Este curso está diseñado para personas que desean superar sus barreras con el idioma y desarrollar confianza al comunicarse en contextos personales y laborales.",
     objectives: [
       "Desarrollar confianza y seguridad al comunicarse en inglés",
       "Ampliar oportunidades personales y laborales",
@@ -149,7 +149,7 @@ const programsData = {
     gradient: "from-[#3CAA36] to-[#2d8a2a]",
     accentColor: "#3CAA36",
     description:
-      "Experiencia vivencial transformadora donde el aprendizaje se encarna, se siente y se reflexiona a través de dinámicas con caballos. Este programa único combina coaching, desarrollo personal y la conexión con estos magníficos animales para lograr cambios profundos y duraderos.",
+      "Experiencia vivencial transformadora donde el aprendizaje se encarna, se siente y se reflexiona a través de dinámicas con caballos. Este curso único combina coaching, desarrollo personal y la conexión con estos magníficos animales para lograr cambios profundos y duraderos.",
     objectives: [
       "Fomentar el autocuidado y gestión emocional consciente",
       "Potenciar empoderamiento personal en vida y trabajo",
@@ -205,7 +205,7 @@ const programsData = {
     accentColor: "#FBEA24",
     textDark: true,
     description:
-      "Integra técnicas de oratoria, comunicación asertiva y empoderamiento, abordando aspectos expresivos y emocionales del habla. Este programa te preparará para comunicarte con impacto, claridad y autenticidad en cualquier contexto.",
+      "Integra técnicas de oratoria, comunicación asertiva y empoderamiento, abordando aspectos expresivos y emocionales del habla. Este curso te preparará para comunicarte con impacto, claridad y autenticidad en cualquier contexto.",
     objectives: [
       "Fortalecer autoconfianza y presencia escénica",
       "Desarrollar autopercepción vocal y control de respiración",
@@ -243,7 +243,7 @@ const programsData = {
       },
     ],
     methodology:
-      "Metodología activa-participativa con énfasis en la práctica constante. Incluye sesiones individuales de coaching vocal, grabaciones para autoevaluación y feedback personalizado. El programa culmina con una presentación final ante audiencia.",
+      "Metodología activa-participativa con énfasis en la práctica constante. Incluye sesiones individuales de coaching vocal, grabaciones para autoevaluación y feedback personalizado. El curso culmina con una presentación final ante audiencia.",
     targetAudience: [
       { icon: Building2, text: "Ejecutivos y gerentes" },
       { icon: GraduationCap, text: "Docentes y formadores" },
@@ -270,7 +270,7 @@ const programsData = {
     gradient: "from-[#E91E63] to-[#9C27B0]",
     accentColor: "#E91E63",
     description:
-      "Bootcamp intensivo en modalidad híbrida (online-presencial) diseñado especialmente para que aprendas sobre comunicación digital. El objetivo es entregar las herramientas necesarias para crear contenido estratégico para redes sociales. Finalizarás el programa con 1 video grabado de 1 minuto listo para publicar, más la planificación y seguimiento para la confección de 3 videos adicionales (30 segundos c/u).",
+      "Bootcamp intensivo en modalidad híbrida (online-presencial) diseñado especialmente para que aprendas sobre comunicación digital. El objetivo es entregar las herramientas necesarias para crear contenido estratégico para redes sociales. Finalizarás el curso con 1 video grabado de 1 minuto listo para publicar, más la planificación y seguimiento para la confección de 3 videos adicionales (30 segundos c/u).",
     objectives: [
       "Aprender técnicas de comunicación digital efectiva",
       "Crear contenido estratégico para redes sociales",
@@ -408,7 +408,7 @@ export default function ProgramDetail() {
   if (!program) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-[#233a63]">Programa no encontrado</p>
+        <p className="text-[#233a63]">Curso no encontrado</p>
       </div>
     )
   }
@@ -425,7 +425,7 @@ export default function ProgramDetail() {
               Inicio
             </button>
             <ChevronRight size={16} className="text-gray-400" />
-            <span className="text-[#35669A]">Programas</span>
+            <span className="text-[#35669A]">Cursos</span>
             <ChevronRight size={16} className="text-gray-400" />
             <span className="text-[#233a63] font-medium">{program.title}</span>
           </nav>
@@ -538,7 +538,7 @@ export default function ProgramDetail() {
             >
               <h2 className="text-2xl font-bold text-[#233a63] mb-6 flex items-center gap-3">
                 <Target className="text-[#316eb5]" size={24} />
-                Objetivos del Programa
+                Objetivos del Curso
               </h2>
               <div className="grid sm:grid-cols-2 gap-4">
                 {program.objectives.map((objective, index) => (
@@ -569,7 +569,7 @@ export default function ProgramDetail() {
             >
               <h2 className="text-2xl font-bold text-[#233a63] mb-6 flex items-center gap-3">
                 <FileText className="text-[#316eb5]" size={24} />
-                Contenidos del Programa
+                Programa del Curso
               </h2>
               <Accordion type="single" collapsible className="space-y-3">
                 {program.contents.map((module, index) => (
@@ -733,7 +733,7 @@ export default function ProgramDetail() {
           {/* Header del modal con gradiente */}
           <div className={`bg-gradient-to-r ${program.gradient} px-6 py-5`}>
             <h2 className={`text-xl font-bold ${program.textDark ? "text-[#233a63]" : "text-white"}`}>
-              Inscripción al Programa
+              Inscripción al Curso
             </h2>
             <p className={`text-sm ${program.textDark ? "text-[#233a63]/80" : "text-white/80"} mt-1`}>
               {program.title} - {program.price}
@@ -959,7 +959,7 @@ export default function ProgramDetail() {
                 <h4 className="font-semibold text-[#233a63] mb-3 text-sm">Resumen de tu inscripción</h4>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Programa:</span>
+                    <span className="text-gray-600">Curso:</span>
                     <span className="font-medium text-[#233a63]">{program.title}</span>
                   </div>
                   <div className="flex justify-between">

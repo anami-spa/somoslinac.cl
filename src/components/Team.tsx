@@ -9,9 +9,9 @@ const team = [
   },
   {
     name: "Lic. María González",
-    role: "Coordinadora de Programas",
+    role: "Coordinadora de Cursos",
     image: `${import.meta.env.BASE_URL}professional-female-coordinator-portrait.jpg`,
-    bio: "Especialista en diseño curricular y desarrollo de programas de liderazgo.",
+    bio: "Especialista en diseño curricular y desarrollo de cursos de liderazgo.",
   },
   {
     name: "Ing. Roberto Silva",

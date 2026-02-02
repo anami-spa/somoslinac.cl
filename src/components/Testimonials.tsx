@@ -12,7 +12,7 @@ const testimonials = [
     company: "Hospital Regional de Concepción",
     image: `${import.meta.env.BASE_URL}professional-woman-chilean.jpg`,
     content:
-      "El programa de comunicación empática transformó la dinámica de nuestro equipo. Ahora tenemos un ambiente laboral más saludable y colaborativo.",
+      "El curso de comunicación empática transformó la dinámica de nuestro equipo. Ahora tenemos un ambiente laboral más saludable y colaborativo.",
     rating: 5,
   },
   {
@@ -30,7 +30,7 @@ const testimonials = [
     company: "Universidad del Biobío",
     image: `${import.meta.env.BASE_URL}professional-woman-educator.jpg`,
     content:
-      "Excelente trabajo en el diseño de programas a medida. Entendieron perfectamente nuestras necesidades y superaron nuestras expectativas.",
+      "Excelente trabajo en el diseño de cursos a medida. Entendieron perfectamente nuestras necesidades y superaron nuestras expectativas.",
     rating: 5,
   },
   {
@@ -48,7 +48,7 @@ const testimonials = [
     company: "Clínica Bío Bío",
     image: `${import.meta.env.BASE_URL}professional-female-coordinator-portrait.jpg`,
     content:
-      "Programas innovadores y personalizados. LINAC se preocupa genuinamente del desarrollo integral de las personas. Altamente recomendado.",
+      "Cursos innovadores y personalizados. LINAC se preocupa genuinamente del desarrollo integral de las personas. Altamente recomendado.",
     rating: 5,
   },
 ]

@@ -58,7 +58,7 @@ export function Navigation() {
   }
 
   const navItems = [
-    { label: "Nuestros Programas", id: "programas" },
+    { label: "Nuestros Cursos", id: "programas" },
     { label: "Metodología", id: "metodologia" },
     { label: "Contacto", id: "contacto" },
   ]

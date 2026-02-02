@@ -40,7 +40,7 @@ export function Contact() {
           <span className="text-[#316eb5] font-semibold text-sm uppercase tracking-wider">Contacto</span>
           <h2 className="text-3xl lg:text-4xl font-bold text-[#233a63] mt-3 mb-4">Contáctanos</h2>
           <p className="text-lg text-[#35669A] max-w-2xl mx-auto">
-            Estamos aquí para ayudarte a encontrar el programa ideal
+            Estamos aquí para ayudarte a encontrar el curso ideal
           </p>
         </motion.div>
 
@@ -198,7 +198,7 @@ export function Contact() {
                   >
                     <option value="">Selecciona una opción</option>
                     <option value="consulta">Consulta general</option>
-                    <option value="programas">Info sobre programas</option>
+                    <option value="programas">Información sobre cursos</option>
                     <option value="empresas">Cotización empresas</option>
                     <option value="otro">Otro</option>
                   </select>

@@ -162,7 +162,7 @@ export function HeroSlide4() {
               onClick={() => scrollToSection("programas")}
               className="group px-10 py-4 bg-[#FBEA24] text-[#233a63] font-bold text-lg rounded-full hover:bg-[#FFEA4A] hover:shadow-2xl hover:shadow-[#FBEA24]/30 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
             >
-              EXPLORAR PROGRAMAS
+              VER TODOS LOS CURSOS
               <ArrowRight
                 size={20}
                 className="group-hover:translate-x-1 transition-transform"

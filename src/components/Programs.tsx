@@ -9,7 +9,7 @@ export const programs = [
   {
     id: "speak-easy-access",
     title: "Speak Easy Access!",
-    subtitle: "Programa de Inglés",
+    subtitle: "Inglés Conversacional",
     description:
       "El inglés es una herramienta clave para acceder a mejores oportunidades, ampliar redes de contacto y proyectar una imagen segura y profesional.",
     objectives: [
@@ -105,11 +105,11 @@ export function Programs() {
         >
           <span className="inline-flex items-center gap-2 text-[#316eb5] font-semibold text-sm uppercase tracking-wider bg-[#316eb5]/10 px-4 py-2 rounded-full">
             <Sparkles size={16} />
-            Nuestros Programas Destacados
+            Nuestros Cursos Destacados
           </span>
           <h2 className="text-3xl lg:text-5xl font-bold text-[#233a63] mt-6 mb-4">Transforma tu potencial</h2>
           <p className="text-lg text-[#35669A] max-w-2xl mx-auto">
-            Programas diseñados para impulsar tu desarrollo personal y profesional con metodologías innovadoras.
+            Cursos diseñados para impulsar tu desarrollo personal y profesional con metodologías innovadoras.
           </p>
         </motion.div>
 
@@ -239,7 +239,7 @@ export function Programs() {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="text-center mt-16"
         >
-          <p className="text-[#35669A] mb-6">¿Necesitas más información sobre nuestros programas?</p>
+          <p className="text-[#35669A] mb-6">¿Necesitas más información sobre nuestros cursos?</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="#contacto"
@@ -252,7 +252,7 @@ export function Programs() {
               href="#contacto"
               className="inline-flex items-center justify-center px-8 py-4 bg-[#FBEA24] text-[#233a63] font-semibold rounded-full hover:bg-[#e6d520] transition-all duration-200 shadow-lg hover:shadow-xl"
             >
-              Programa Personalizado
+              Capacitación a Medida
               <ArrowRight className="ml-2" size={20} />
             </a>
           </div>

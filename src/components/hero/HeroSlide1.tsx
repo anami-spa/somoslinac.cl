@@ -61,7 +61,7 @@ export function HeroSlide1() {
                   transition={{ duration: 0.8, delay: 0.4 }}
                   className="text-lg md:text-xl text-[#35669A] max-w-xl"
                 >
-                  Programas de Oratoria, Inglés y Liderazgo con metodología práctica y vivencial
+                  Cursos de Oratoria, Inglés y Liderazgo con metodología práctica y vivencial
                 </motion.p>
               </div>
 
@@ -103,7 +103,7 @@ export function HeroSlide1() {
                   onClick={() => scrollToSection("programas")}
                   className="group px-8 py-4 bg-gradient-to-r from-[#316eb5] to-[#254e8a] text-white font-bold rounded-full hover:shadow-xl hover:shadow-[#316eb5]/30 transition-all duration-300 flex items-center justify-center gap-2"
                 >
-                  Ver Programas
+                  Ver Cursos
                   <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </button>
                 <button

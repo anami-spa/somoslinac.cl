@@ -94,12 +94,12 @@ export function Footer() {
 
           {/* Programas destacados */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Nuestros Programas</h3>
+            <h3 className="text-lg font-semibold mb-4">Nuestros Cursos</h3>
             <ul className="space-y-3 text-[#65A5CD] text-sm">
               <li className="hover:text-[#FBEA24] transition-colors cursor-pointer">Speak Easy Access!</li>
               <li className="hover:text-[#FBEA24] transition-colors cursor-pointer">¡Toma las Riendas!</li>
               <li className="hover:text-[#FBEA24] transition-colors cursor-pointer">Oratoria y Comunicación</li>
-              <li className="hover:text-[#FBEA24] transition-colors cursor-pointer">Programas Empresariales</li>
+              <li className="hover:text-[#FBEA24] transition-colors cursor-pointer">Cursos Empresariales</li>
             </ul>
           </div>
 

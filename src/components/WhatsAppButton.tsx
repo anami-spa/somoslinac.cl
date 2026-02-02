@@ -17,7 +17,7 @@ const WhatsAppIcon = () => (
 
 export function WhatsAppButton() {
   const phoneNumber = "56968291315" // Número real de LINAC
-  const message = "Hola, me interesa obtener más información sobre los programas de capacitación de LINAC."
+  const message = "Hola, me interesa obtener más información sobre los cursos de capacitación de LINAC."
 
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
 

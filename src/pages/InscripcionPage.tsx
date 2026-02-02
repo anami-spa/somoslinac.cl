@@ -72,7 +72,7 @@ const programsData = {
   "speak-easy-access": {
     id: "speak-easy-access",
     title: "Speak Easy Access!",
-    subtitle: "Programa de Inglés",
+    subtitle: "Inglés Conversacional",
     price: "$180.000 CLP",
     priceNumber: 180000,
     icon: Globe,
@@ -303,7 +303,7 @@ export function InscripcionPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 pt-20">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-[#233a63] mb-4">Programa no encontrado</h1>
+          <h1 className="text-2xl font-bold text-[#233a63] mb-4">Curso no encontrado</h1>
           <button
             onClick={() => navigate("/")}
             className="text-[#316eb5] hover:underline flex items-center gap-2 mx-auto"
@@ -345,7 +345,7 @@ export function InscripcionPage() {
             <Icon className="text-white" size={32} />
           </div>
           <h1 className="text-3xl lg:text-4xl font-bold text-[#233a63] mb-2">
-            Inscripción al Programa
+            Inscripción al Curso
           </h1>
           <p className="text-xl text-[#316eb5] font-semibold">{program.title}</p>
           <p className="text-gray-600">{program.subtitle}</p>
@@ -403,7 +403,7 @@ export function InscripcionPage() {
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm opacity-90">Programa seleccionado</p>
+                    <p className="text-sm opacity-90">Curso seleccionado</p>
                     <p className="font-bold text-lg">{program.title}</p>
                   </div>
                   <div className="text-right">
@@ -573,7 +573,7 @@ export function InscripcionPage() {
                     </Label>
                     <textarea
                       id="comments"
-                      placeholder="¿Tienes alguna pregunta o comentario sobre el programa?"
+                      placeholder="¿Tienes alguna pregunta o comentario sobre el curso?"
                       rows={4}
                       className="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-[#316eb5] focus:border-transparent"
                       {...register("comments")}
@@ -625,7 +625,7 @@ export function InscripcionPage() {
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 size={16} className="mt-0.5 flex-shrink-0" />
-                      <span>Verificaremos tu pago y te enviaremos los detalles del programa</span>
+                      <span>Verificaremos tu pago y te enviaremos los detalles del curso</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 size={16} className="mt-0.5 flex-shrink-0" />
@@ -661,7 +661,7 @@ export function InscripcionPage() {
                 <h3 className="font-semibold text-[#233a63] mb-4">Resumen de tu inscripción</h3>
                 <div className="space-y-2.5">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Programa:</span>
+                    <span className="text-gray-600">Curso:</span>
                     <span className="font-medium text-[#233a63]">{program.title}</span>
                   </div>
                   <div className="flex justify-between text-sm">

@@ -95,7 +95,7 @@ export function Methodology() {
                 <CheckCircle size={24} className="text-[#FBEA24]" />
                 <span className="text-3xl font-bold">100%</span>
               </div>
-              <p className="text-[#65A5CD]">Programas personalizados</p>
+              <p className="text-[#65A5CD]">Cursos personalizados</p>
             </div>
             <div>
               <div className="flex items-center justify-center gap-2 mb-2">

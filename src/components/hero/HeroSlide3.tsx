@@ -182,7 +182,7 @@ export function HeroSlide3() {
                   onClick={() => scrollToSection("programas")}
                   className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-bold text-lg rounded-full border-2 border-white/30 hover:bg-white/20 hover:border-white/50 transition-all duration-300"
                 >
-                  VER PROGRAMAS
+                  VER CURSOS
                 </button>
               </motion.div>
 
