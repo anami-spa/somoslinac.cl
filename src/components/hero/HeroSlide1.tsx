@@ -10,7 +10,7 @@ export function HeroSlide1() {
   }
 
   return (
-    <section id="inicio" className="relative min-h-[90vh] flex items-center bg-gradient-to-b from-[#f5f9ff] via-white to-[#f5f9ff] overflow-hidden">
+    <section id="inicio" className="relative min-h-screen flex items-center bg-gradient-to-b from-[#f5f9ff] via-white to-[#f5f9ff] overflow-hidden py-20">
       {/* Patrón de fondo */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 left-20 w-64 h-64 bg-[#316eb5] rounded-full blur-3xl" />

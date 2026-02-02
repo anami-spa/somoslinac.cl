@@ -69,7 +69,7 @@ export function HeroSlide4() {
   ]
 
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center overflow-hidden py-20">
       {/* Imagen/Video de fondo */}
       <div className="absolute inset-0">
         {/* Por ahora usamos un gradiente, se puede reemplazar con imagen/video */}

@@ -39,7 +39,7 @@ export function HeroSlide2() {
   }
 
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-[#8B5CF6] via-[#EC4899] to-[#F59E0B]">
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#8B5CF6] via-[#EC4899] to-[#F59E0B] py-20">
       {/* Patrón de puntos - Esquina superior izquierda */}
       <div className="absolute top-8 left-8 text-white/40">
         <DotPattern />
