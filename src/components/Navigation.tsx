@@ -59,6 +59,7 @@ export function Navigation() {
 
   const navItems = [
     { label: "Nuestros Cursos", id: "programas" },
+    { label: "Quiénes Somos", id: "nosotros" },
     { label: "Metodología", id: "metodologia" },
     { label: "Contacto", id: "contacto" },
   ]

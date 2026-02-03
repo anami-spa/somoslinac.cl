@@ -2,11 +2,14 @@
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
-import { Heart, Target, Users, Lightbulb } from "lucide-react"
+import { Heart, Target, Users, Lightbulb, GraduationCap, Globe, Mic } from "lucide-react"
 
 export function AboutUs() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+
+  const founderRef = useRef(null)
+  const founderInView = useInView(founderRef, { once: true, margin: "-100px" })
 
   const values = [
     {
@@ -100,6 +103,94 @@ export function AboutUs() {
               </motion.div>
             ))}
           </motion.div>
+        </div>
+
+        {/* Subsección: Fundadora */}
+        <div className="mt-24 pt-24 border-t border-gray-200" ref={founderRef}>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Columna izquierda: Imagen */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={founderInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8 }}
+              className="order-2 lg:order-1"
+            >
+              <div className="relative">
+                <img
+                  src="https://placehold.co/800x800/316eb5/ffffff?text=Pamela+P%C3%A9rez+Toledo"
+                  className="rounded-2xl shadow-2xl w-full aspect-square object-cover hover:scale-105 transition-transform duration-300"
+                  alt="Pamela Pérez Toledo - Fundadora y Directora de LINAC"
+                />
+                <div className="absolute top-4 right-4 bg-[#FBEA24] text-[#233a63] px-3 py-1 rounded-full text-sm font-semibold">
+                  Placeholder
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Columna derecha: Bio + Credenciales */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={founderInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="order-1 lg:order-2"
+            >
+              <span className="text-[#316eb5] font-semibold text-sm uppercase tracking-wider">
+                Nuestra Directora
+              </span>
+              <h3 className="text-3xl lg:text-4xl font-bold text-[#233a63] mt-3 mb-3">
+                Pamela Pérez Toledo
+              </h3>
+              <p className="text-xl text-[#316eb5] font-medium mb-6">
+                Fundadora y Directora de LINAC
+              </p>
+
+              <p className="text-lg text-[#35669A] leading-relaxed mb-6">
+                Fonoaudióloga certificada y experta bilingüe con amplia trayectoria en el desarrollo de habilidades
+                comunicacionales para profesionales y empresas. Su pasión es potenciar el impacto de cada persona
+                a través del poder de la voz y la comunicación efectiva.
+              </p>
+
+              <p className="text-lg text-[#35669A] leading-relaxed mb-8">
+                Con una metodología integral que combina técnicas de fonoaudiología, coaching vocal y comunicación
+                estratégica, ha transformado la forma en que cientos de profesionales se expresan, logrando que hablen
+                con seguridad, claridad y presencia en cualquier escenario.
+              </p>
+
+              {/* Credenciales destacadas */}
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <GraduationCap className="text-[#316eb5] mt-1 flex-shrink-0" size={24} />
+                  <div>
+                    <p className="font-semibold text-[#233a63]">Fonoaudióloga Certificada</p>
+                    <p className="text-sm text-[#35669A]">Especialista en comunicación profesional y técnica vocal aplicada</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <Globe className="text-[#316eb5] mt-1 flex-shrink-0" size={24} />
+                  <div>
+                    <p className="font-semibold text-[#233a63]">Experta Bilingüe Español-Inglés</p>
+                    <p className="text-sm text-[#35669A]">Capacitaciones en ambos idiomas para contextos nacionales e internacionales</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <Mic className="text-[#316eb5] mt-1 flex-shrink-0" size={24} />
+                  <div>
+                    <p className="font-semibold text-[#233a63]">Coach en Oratoria y Comunicación</p>
+                    <p className="text-sm text-[#35669A]">Transforma tu voz en tu mejor herramienta de liderazgo e impacto</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Quote destacada */}
+              <div className="mt-8 bg-gradient-to-r from-[#316eb5] to-[#254e8a] p-6 rounded-2xl">
+                <p className="text-white text-lg italic leading-relaxed">
+                  "Tu voz es tu mejor herramienta. Mi misión es ayudarte a hablar con seguridad, claridad e impacto para alcanzar tus metas profesionales."
+                </p>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

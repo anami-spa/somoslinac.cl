@@ -1,4 +1,4 @@
-import { ArrowRight, CheckCircle, Sparkles, BookOpen, Users } from "lucide-react"
+import { ArrowRight, CheckCircle } from "lucide-react"
 import { motion } from "framer-motion"
 
 export function HeroSlide1() {
@@ -126,75 +126,13 @@ export function HeroSlide1() {
                 {/* Efecto de fondo */}
                 <div className="absolute -inset-4 bg-gradient-to-br from-[#316eb5]/20 to-[#65A5CD]/20 rounded-3xl blur-2xl" />
 
-                {/* Imagen principal o placeholder */}
-                <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#316eb5] to-[#254e8a] h-[500px] flex items-center justify-center">
-                  {/* Patrón de fondo decorativo */}
-                  <div
-                    className="absolute inset-0 opacity-10"
-                    style={{
-                      backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-                    }}
+                {/* Banner del Curso de Oratoria */}
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl w-full max-w-lg mx-auto">
+                  <img
+                    src="/curso_oratoria_banner_1770152734474.png"
+                    alt="Curso de Oratoria - Potencia tu Comunicación Profesional"
+                    className="w-full h-auto object-contain"
                   />
-
-                  {/* Contenido del placeholder */}
-                  <div className="relative z-10 text-center text-white p-8">
-                    {/* Iconos decorativos */}
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ duration: 0.6, delay: 0.7 }}
-                      className="flex items-center justify-center gap-6 mb-8"
-                    >
-                      <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
-                        <BookOpen size={40} className="text-[#FBEA24]" />
-                      </div>
-                      <div className="w-24 h-24 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                        <Sparkles size={48} className="text-white" />
-                      </div>
-                      <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
-                        <Users size={40} className="text-[#FBEA24]" />
-                      </div>
-                    </motion.div>
-
-                    {/* Texto */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: 0.9 }}
-                    >
-                      <h3 className="text-3xl font-bold mb-4">LINAC</h3>
-                      <p className="text-lg opacity-90 max-w-md mx-auto">
-                        Liderazgo e Innovación en Nuevas Áreas de Capacitación
-                      </p>
-                      <div className="mt-6 inline-block px-6 py-2 bg-[#FBEA24] text-[#233a63] rounded-full font-bold text-sm">
-                        Imagen de prueba
-                      </div>
-                    </motion.div>
-
-                    {/* Elementos decorativos flotantes */}
-                    <motion.div
-                      animate={{
-                        y: [0, -10, 0],
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      }}
-                      className="absolute top-8 right-8 w-16 h-16 rounded-full bg-[#FBEA24]/30 blur-xl"
-                    />
-                    <motion.div
-                      animate={{
-                        y: [0, 10, 0],
-                      }}
-                      transition={{
-                        duration: 4,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      }}
-                      className="absolute bottom-8 left-8 w-20 h-20 rounded-full bg-white/20 blur-xl"
-                    />
-                  </div>
                 </div>
               </div>
             </motion.div>

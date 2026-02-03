@@ -13,10 +13,10 @@ export function HomePage() {
   return (
     <>
       <Hero />
+      <Programs />
       <Suspense fallback={<div className="h-20" />}>
         <AboutUs />
       </Suspense>
-      <Programs />
       <Suspense fallback={<div className="h-20" />}>
         <Methodology />
       </Suspense>

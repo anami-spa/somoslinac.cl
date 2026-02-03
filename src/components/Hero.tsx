@@ -1,9 +1,5 @@
-import { HeroSlider } from "./hero/HeroSlider"
+import { HeroSlide1 } from "./hero/HeroSlide1"
 
 export function Hero() {
-  return (
-    <section id="inicio">
-      <HeroSlider />
-    </section>
-  )
+  return <HeroSlide1 />
 }
