@@ -416,7 +416,7 @@ export default function ProgramDetail() {
   const Icon = program.icon
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-[#f5f9ff]">
+    <div className="min-h-screen bg-gradient-to-b from-white to-[#f5f9ff] pt-20">
       {/* Breadcrumb */}
       <div className="bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">

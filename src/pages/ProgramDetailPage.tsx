@@ -1,9 +1,14 @@
-import { Suspense, lazy } from "react"
+import { Suspense, lazy, useEffect } from "react"
 import { Footer } from "@/components/Footer"
 
 const ProgramDetail = lazy(() => import("@/components/ProgramDetail"))
 
 export function ProgramDetailPage() {
+  // Scroll al inicio al cargar la página
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <>
       <Suspense fallback={
