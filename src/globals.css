@@ -114,3 +114,17 @@ nextjs-portal {
     color: hsl(var(--foreground));
   }
 }
+
+/* GSAP Voice Wave Effect - Optimización de performance */
+.char {
+  display: inline-block;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+/* Efecto de glow para la palabra destacada */
+.hero-title-glow {
+  will-change: text-shadow;
+  transition: text-shadow 0.3s ease;
+}

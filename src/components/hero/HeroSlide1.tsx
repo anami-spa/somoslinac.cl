@@ -1,7 +1,13 @@
 import { ArrowRight, CheckCircle } from "lucide-react"
 import { motion } from "framer-motion"
+import { useEffect, useRef } from "react"
+import { gsap } from "gsap"
+import SplitType from "split-type"
 
 export function HeroSlide1() {
+  const titleRef = useRef<HTMLHeadingElement>(null)
+  const comunicacionRef = useRef<HTMLSpanElement>(null)
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
@@ -29,6 +35,76 @@ export function HeroSlide1() {
       transition: { duration: 0.5, ease: "easeOut" },
     },
   }
+
+  // Efecto GSAP "Voice Wave" para el título
+  useEffect(() => {
+    if (!titleRef.current) return
+
+    // Split text en caracteres
+    const split = new SplitType(titleRef.current, {
+      types: "chars",
+      tagName: "span"
+    })
+
+    // Animación de entrada con efecto de onda vocal
+    gsap.fromTo(
+      split.chars,
+      {
+        opacity: 0,
+        y: 50,
+        rotationX: -90,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        rotationX: 0,
+        stagger: {
+          amount: 0.8,
+          from: "start",
+          ease: "power2.out",
+        },
+        duration: 0.8,
+        ease: "back.out(1.2)",
+        delay: 0.5,
+      }
+    )
+
+    // Efecto especial en la palabra "Comunicación"
+    if (comunicacionRef.current) {
+      const comunicacionSplit = new SplitType(comunicacionRef.current, {
+        types: "chars",
+        tagName: "span"
+      })
+
+      // Wave effect sutil en "Comunicación"
+      gsap.to(comunicacionSplit.chars, {
+        y: -3,
+        stagger: {
+          each: 0.05,
+          repeat: -1,
+          yoyo: true,
+        },
+        duration: 0.6,
+        ease: "sine.inOut",
+        delay: 1.5,
+      })
+
+      // Glow sutil y equilibrado
+      gsap.to(comunicacionRef.current, {
+        textShadow: "0 0 8px rgba(49, 110, 181, 0.3), 0 0 15px rgba(49, 110, 181, 0.2)",
+        repeat: -1,
+        yoyo: true,
+        duration: 2.5,
+        ease: "sine.inOut",
+        delay: 1.5,
+      })
+    }
+
+    // Cleanup
+    return () => {
+      split.revert()
+    }
+  }, [])
 
   return (
     <section id="inicio" className="relative min-h-screen flex items-center bg-gradient-to-b from-[#f5f9ff] via-white to-[#f5f9ff] overflow-hidden py-20">
@@ -61,17 +137,24 @@ export function HeroSlide1() {
 
               {/* Título */}
               <div className="space-y-4">
-                <motion.h1
-                  variants={itemVariants}
+                <h1
+                  ref={titleRef}
                   className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#233a63] leading-tight"
+                  style={{ perspective: "1000px" }}
                 >
                   Potencia tu{" "}
-                  <span className="bg-gradient-to-r from-[#316eb5] to-[#65A5CD] bg-clip-text text-transparent">
+                  <span
+                    ref={comunicacionRef}
+                    className="inline-block"
+                    style={{
+                      color: "#316eb5",
+                    }}
+                  >
                     Comunicación
                   </span>
                   <br />
                   Profesional
-                </motion.h1>
+                </h1>
                 <motion.p
                   variants={itemVariants}
                   className="text-lg md:text-xl text-[#35669A] max-w-xl"
