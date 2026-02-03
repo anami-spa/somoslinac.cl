@@ -9,6 +9,27 @@ export function HeroSlide1() {
     }
   }
 
+  // Variantes consolidadas para mejor performance
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
+  }
+
   return (
     <section id="inicio" className="relative min-h-screen flex items-center bg-gradient-to-b from-[#f5f9ff] via-white to-[#f5f9ff] overflow-hidden py-20">
       {/* Patrón de fondo */}
@@ -22,16 +43,14 @@ export function HeroSlide1() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Contenido */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
               className="space-y-8"
             >
               {/* Badge */}
               <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                variants={itemVariants}
                 className="inline-flex items-center gap-2 bg-gradient-to-r from-[#316eb5]/10 to-[#65A5CD]/10 px-5 py-2.5 rounded-full border border-[#316eb5]/20"
               >
                 <div className="w-2 h-2 bg-[#316eb5] rounded-full animate-pulse" />
@@ -43,9 +62,7 @@ export function HeroSlide1() {
               {/* Título */}
               <div className="space-y-4">
                 <motion.h1
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.3 }}
+                  variants={itemVariants}
                   className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#233a63] leading-tight"
                 >
                   Potencia tu{" "}
@@ -56,9 +73,7 @@ export function HeroSlide1() {
                   Profesional
                 </motion.h1>
                 <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
+                  variants={itemVariants}
                   className="text-lg md:text-xl text-[#35669A] max-w-xl"
                 >
                   Cursos de Oratoria, Inglés y Liderazgo con metodología práctica y vivencial
@@ -66,37 +81,24 @@ export function HeroSlide1() {
               </div>
 
               {/* Features */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-                className="space-y-3"
-              >
+              <motion.div variants={itemVariants} className="space-y-3">
                 {[
                   "Fonoaudióloga Certificada",
                   "Metodología Práctica y Vivencial",
                   "Presencial en Concepción",
-                ].map((feature, index) => (
-                  <motion.div
-                    key={feature}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                    className="flex items-center gap-3"
-                  >
+                ].map((feature) => (
+                  <div key={feature} className="flex items-center gap-3">
                     <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#316eb5] to-[#65A5CD] flex items-center justify-center flex-shrink-0">
                       <CheckCircle size={16} className="text-white" />
                     </div>
                     <span className="text-[#233a63] font-medium">{feature}</span>
-                  </motion.div>
+                  </div>
                 ))}
               </motion.div>
 
               {/* CTAs */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.9 }}
+                variants={itemVariants}
                 className="flex flex-col sm:flex-row gap-4"
               >
                 <button
@@ -115,11 +117,11 @@ export function HeroSlide1() {
               </motion.div>
             </motion.div>
 
-            {/* Imagen de prueba con diseño decorativo */}
+            {/* Imagen */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
               className="relative"
             >
               <div className="relative">
@@ -129,9 +131,10 @@ export function HeroSlide1() {
                 {/* Banner del Curso de Oratoria */}
                 <div className="relative rounded-3xl overflow-hidden shadow-2xl w-full max-w-lg mx-auto">
                   <img
-                    src="/curso_oratoria_banner_1770152734474.png"
+                    src={`${import.meta.env.BASE_URL}curso_oratoria_banner_1770152734474.png`}
                     alt="Curso de Oratoria - Potencia tu Comunicación Profesional"
                     className="w-full h-auto object-contain"
+                    loading="eager"
                   />
                 </div>
               </div>

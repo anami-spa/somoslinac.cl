@@ -123,15 +123,14 @@ export function Programs() {
                 key={program.id}
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.15 }}
+                transition={{ duration: 0.5, delay: Math.min(index * 0.1, 0.3), ease: "easeOut" }}
                 onMouseEnter={() => setHoveredCard(program.id)}
                 onMouseLeave={() => setHoveredCard(null)}
                 className="group relative"
               >
-                <motion.div
-                  animate={{ y: isHovered ? -8 : 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="h-full bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-[#316eb5]/15 transition-all duration-500 border border-gray-100"
+                <div
+                  className="h-full bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-[#316eb5]/15 transition-all duration-300 border border-gray-100"
+                  style={{ transform: isHovered ? 'translateY(-8px)' : 'translateY(0)' }}
                 >
                   {/* Header con imagen de fondo y gradiente overlay */}
                   <div className="relative h-48 overflow-hidden">
@@ -226,7 +225,7 @@ export function Programs() {
                       />
                     </motion.button>
                   </div>
-                </motion.div>
+                </div>
               </motion.div>
             )
           })}
